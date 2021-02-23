@@ -1,0 +1,164 @@
+:root {
+  --theme-color: #45818E;
+}
+
+.markdown-section code {
+  color: #8F546B;
+}
+
+.github-corner svg {
+  fill: #76A5AF;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+
+.sidebar > h1 {
+  order: 1;
+  margin: 1.5rem;
+}
+
+.sidebar .search {
+  order: 2;
+  border-top: 1px solid #eee;
+}
+
+.sidebar .sidebar-nav {
+  order: 3;
+}
+
+body.close .sidebar {
+  transform: translateX(-100%);
+}
+
+.app-sub-sidebar li:before {
+ content:"";
+}
+
+.sidebar-nav ul li > ul:nth-child(2) {
+  display: list-item !important;
+}
+
+.sidebar-nav li.active.open + ul.app-sub-sidebar {
+  display: block;
+}
+
+.sidebar-nav li.collapse + ul.app-sub-sidebar {
+  display: none;
+}
+
+/* https://stackoverflow.com/a/54207259 */
+select {
+  padding: 15px;
+  border-radius: 3px;
+  height: 50px;
+  padding-right: 30px;
+  font-size: 14px;
+  border-color: white;
+  position: relative;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: white url("data:image/svg+xml;utf8,<svg viewBox='0 0 140 140' width='15' height='20' xmlns='http://www.w3.org/2000/svg'><g><path d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' fill='gray'/></g></svg>") no-repeat;
+  background-position: right 10px top 55%;
+}
+
+/* https://stackoverflow.com/a/3397156 */
+input:focus {
+    outline:none;
+}
+
+.toggle.hidden a:before {
+  content: "show ";
+}
+
+.toggle.hidden a {
+  padding-left: 25px;
+  background: white url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' width='15' height='15' xmlns='http://www.w3.org/2000/svg'><g><path d='m1.7480315 6.7716537l10.582677 10.456692l10.582677 -10.456692' stroke='gray' stroke-width='2' fill='none'/></g></svg>") no-repeat;
+  background-position: left 0px top 3px;
+}
+
+.toggle a:before {
+  content: "hide ";
+}
+
+.toggle a {
+  padding-left: 25px;
+  background: white url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' width='15' height='20' xmlns='http://www.w3.org/2000/svg'><g><path d='m1.7480315 17.2283457l10.582677 -10.456692l10.582677 10.456692' stroke='gray' stroke-width='2' fill='none'/></g></svg>") no-repeat;
+  background-position: left 0px top 0px;
+}
+
+.toggle.hidden img{
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.toggle img {
+  max-height: 500px;
+  transition: max-height 0.3s ease-in;
+}
+
+/* top box */
+
+.topbox {
+  max-width: 45%;
+  float: right;
+  border-collapse: collapse;
+  padding-top: 1em;
+}
+
+.topbox tr {
+  border: 0px;
+}
+
+.topbox td,
+.topbox th {
+  border: 0px;
+  min-width: 8em;
+}
+
+.topbox th {
+  padding: 1rem;
+}
+
+.topbox tr:last-child td {
+  padding-bottom: 1rem;
+}
+
+.topbox tr:nth-child(1n) {
+  background-color: #f8f8f8;
+}
+
+.topbox tr:first-child th,
+.topbox tr:first-child th {
+  border-top: 1px solid gray;  
+}
+
+.topbox tr td:first-child,
+.topbox tr th:first-child {
+  border-left: 1px solid gray;
+}
+
+.topbox tr:last-child td,
+.topbox tr:last-child th {
+  border-bottom: 1px solid gray;
+}
+
+.topbox tr td:last-child,
+.topbox tr th:last-child {
+  border-right: 1px solid gray;
+}
+
+/* topgif */
+#topgif {
+  width: 45%;
+  max-width: 384px;
+}
+
+video {
+  max-width: 80%;
+}

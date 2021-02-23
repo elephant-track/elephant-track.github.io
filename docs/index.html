@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ELEPHANT Docs</title>
+  <link rel="icon" href="../_media/favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="ELEPHANT Docs">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      alias: {
+        '/v0.1.0/(.*)': '/$1',
+        '/.*/_sidebar.md': '/_sidebar.md',
+      },
+      name: '<a id="logo-link" class="app-name-link" data-nosearch href="/" onclick="alwaysScrollToTop();"><div class="sidebar-logo">' +
+        '<img src="_media/elephant-logo-text.svg" height="64px">' +
+        '<span class="sidebar-logo-title"></span>' +
+        '</div></a>' +
+        '<select id="version-selector" name="version" class="sidebar-version-select">' +
+        '<option value="">latest</option>' +
+        '<option value="v0.1.0">v0.1.0</option>' +
+        '</select>' +
+        '</div>',
+      repo: 'https://github.com/ksugar/elephant-docs',
+      loadSidebar: true,
+      loadFooter: true,
+      auto2top: true,
+      subMaxLevel: 4,
+      sidebarDisplayLevel: 1,
+      ga: 'UA-190429343-1',
+      search: {
+        paths: 'auto',
+        namespace: 'docs-elephant',
+        hideOtherSidebarContent: true,
+        depth: 3,
+        pathNamespaces: ['', '/v0.1.0']
+      },
+      namespaces: [
+        {
+          id: "version",
+          values: ["v0.1.0"],
+          default: "v0.1.0",
+          optional: true,
+          selector: "#version-selector"
+        }
+      ],
+      plugins: [
+        function (hook, vm) {
+          hook.doneEach(function () {
+            var appNameLink = Docsify.dom.find("#logo-link");
+
+            if (!appNameLink) return;
+
+            appNameLink.href = vm.config.currentNamespace;
+          });
+          hook.doneEach(function () {
+            Docsify.dom.findAll("a.section-link").forEach(anchorTag => anchorTag.onclick = alwaysScroll);
+            Docsify.dom.findAll("a.anchor").forEach(anchorTag => anchorTag.onclick = alwaysScroll);
+          });
+        },
+      ]
+    }
+  </script>
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/ga.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <!-- https://github.com/palkan/docsify-namespaced (MIT License) -->
+  <script src="../assets/js/docsify-namespaced.js"></script>
+  <!-- https://github.com/jperasmus/docsify-copy-code (MIT License) -->
+  <script src="https://unpkg.com/docsify-copy-code@2"></script>
+  <!-- https://github.com/zhengxiangqi/docsify-scroll-to-top (MIT License) -->
+  <script src="//unpkg.com/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
+  <!-- https://github.com/iPeng6/docsify-sidebar-collapse (MIT License) customized -->
+  <script src="../assets/js/docsify-sidebar-collapse.js"></script>
+  <!-- https://github.com/francoischalifour/medium-zoom (MIT License) -->
+  <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!-- https://github.com/alertbox/docsify-footer (MIT License) -->
+  <script src="//cdn.jsdelivr.net/npm/@alertbox/docsify-footer/dist/docsify-footer.min.js"></script>
+  <script>
+    function setImageVisible(event, id) {
+      var img = document.getElementById(id);
+      event.target.parentElement.classList.toggle('hidden');
+    }
+    function alwaysScroll(event) {
+      var targetId = event.target.baseURI.substr(event.target.baseURI.indexOf("?id=") + 4);
+      var targetElement = Docsify.dom.find("#" + targetId);
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
+    function alwaysScrollToTop() {
+      var contentElement = Docsify.dom.find("body");
+      contentElement.scrollIntoView({ behavior: "smooth" });
+    }
+  </script>
+
+</body>
+
+</html>
