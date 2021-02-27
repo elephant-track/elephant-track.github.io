@@ -21,7 +21,7 @@
     </tr>
     <tr>
       <td>Publication</td>
-      <td><a href="https://www.biorxiv.org/content">bioRxiv</a></td>
+      <td><a href="https://biorxiv.org/cgi/content/short/2021.02.26.432552v1">bioRxiv</a></td>
     </tr>
   </tbody>
 </table>
@@ -1145,7 +1145,23 @@ Please post feedback and questions to the [Image.sc forum](https://forum.image.s
 It is important to add the tag `elephant` to your posts so that we can reach you quickly.
 ## Citation
 
-Please cite our paper.
+Please cite our paper on [bioRxiv](https://biorxiv.org/cgi/content/short/2021.02.26.432552v1).
+
+```
+@article {Sugawara2021.02.26.432552,
+	author = {Sugawara, Ko and Cevrim, Cagri and Averof, Michalis},
+	title = {Tracking cell lineages in 3D by incremental deep learning},
+	elocation-id = {2021.02.26.432552},
+	year = {2021},
+	doi = {10.1101/2021.02.26.432552},
+	publisher = {Cold Spring Harbor Laboratory},
+	abstract = {Deep learning is emerging as a powerful approach for bioimage analysis, but its wider use is limited by the scarcity of annotated data for training. We present ELEPHANT, an interactive platform for cell tracking in 4D that seamlessly integrates annotation, deep learning, and proofreading. ELEPHANT{\textquoteright}s user interface supports cycles of incremental learning starting from sparse annotations, yielding accurate, user-validated cell lineages with a modest investment in time and effort.Competing Interest StatementKS is employed part-time by LPIXEL Inc.},
+	URL = {https://www.biorxiv.org/content/early/2021/02/26/2021.02.26.432552},
+	eprint = {https://www.biorxiv.org/content/early/2021/02/26/2021.02.26.432552.full.pdf},
+	journal = {bioRxiv}
+}
+```
+
 
 ## License
 
