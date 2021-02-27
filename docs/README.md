@@ -450,7 +450,7 @@ Every time you update the labels (Shortcut: `U`), a new training epoch will star
 
 Importing a pretrained model is simple. Just specify the model parameter file located at the `workspace/models` in the settings.
 
-You can download [a pretrained parameter file]() for the demo dataset.
+You can download [a pretrained parameter file](https://github.com/elephant-track/elephant-server/releases/download/v0.1.0/elephant-demo_seg.pth) for the demo dataset.
 
 ### Linking workflow
 
