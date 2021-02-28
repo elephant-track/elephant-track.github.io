@@ -285,6 +285,9 @@ The following window will pop up.
 ELEPHANT inherits the user-friendly [shortcuts](https://github.com/mastodon-sc/mastodon#actions-and-keyboard-shortcuts) from Mastodon.
 Please install the shortcut setting by copying <a href="_media/elephant_keymaps.yaml" download>this file</a> to the `~/.mastodon/keymaps/` directory and editing the `~/.mastodon/keymaps/keymaps.yaml` file as below.
 
+| Info <br> :information_source: | If you cannot find the `~/.mastodon/keymaps/` directory, please run [File > Preferences...] first to create it with the `~/.mastodon/keymaps/keymaps.yaml`. |
+| :----------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
 ```yaml
 !keymapslist
 defaultKeymapName: Elephant
