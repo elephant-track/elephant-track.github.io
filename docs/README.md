@@ -12,7 +12,7 @@
       <td><a href="http://www.ens-lyon.fr/lecole/nous-connaitre/annuaire/ko-sugawara">Ko Sugawara</a></td>
     </tr>
     <tr>
-      <td valign="top">Forum</td>
+      <td>Forum</td>
       <td><a href="https://forum.image.sc/tag/elephant">Image.sc forum</a><br>Please post feedback and questions to the forum.<br>It is important to add the tag <code>elephant</code> to your posts so that we can reach you quickly.</td>
     </tr>
     <tr>
@@ -21,7 +21,7 @@
     </tr>
     <tr>
       <td>Publication</td>
-      <td><a href="https://biorxiv.org/cgi/content/short/2021.02.26.432552v1">bioRxiv</a></td>
+      <td>Sugawara, K., Cevrim, C. & Averof, M. <a href="https://biorxiv.org/cgi/content/short/2021.02.26.432552v1"><i>Tracking cell lineages in 3D by incremental deep learning.</i></a> bioRxiv 2021. doi:10.1101/2021.02.26.432552</td>
     </tr>
   </tbody>
 </table>
@@ -1147,7 +1147,9 @@ It is important to add the tag `elephant` to your posts so that we can reach you
 
 Please cite our paper on [bioRxiv](https://biorxiv.org/cgi/content/short/2021.02.26.432552v1).
 
-```
+- Sugawara, K., Cevrim, C. & Averof, M. [*Tracking cell lineages in 3D by incremental deep learning.*](https://biorxiv.org/cgi/content/short/2021.02.26.432552v1) bioRxiv 2021. doi:10.1101/2021.02.26.432552
+
+```.bib
 @article {Sugawara2021.02.26.432552,
 	author = {Sugawara, Ko and Cevrim, Cagri and Averof, Michalis},
 	title = {Tracking cell lineages in 3D by incremental deep learning},
@@ -1161,6 +1163,8 @@ Please cite our paper on [bioRxiv](https://biorxiv.org/cgi/content/short/2021.02
 	journal = {bioRxiv}
 }
 ```
+
+<div style="text-align: right"><a href="https://www.biorxiv.org/highwire/citation/1813952/bibtext">download as .bib file</a></div>
 
 
 ## License

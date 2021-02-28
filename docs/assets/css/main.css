@@ -111,6 +111,10 @@ input:focus {
   padding-top: 1em;
 }
 
+.topbox td {
+  vertical-align: top;
+}
+
 .topbox tr {
   border: 0px;
 }
