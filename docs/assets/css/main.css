@@ -31,7 +31,13 @@
 }
 
 body.close .sidebar {
-  transform: translateX(-200%);
+  transform: translateX(-100%);
+}
+@media screen and (max-width:768px) {
+  .sidebar {
+    left:-400px;
+    transition:transform .25s ease-out
+   }
 }
 
 .app-sub-sidebar li:before {
@@ -111,6 +117,15 @@ input:focus {
   padding-top: 1em;
 }
 
+@media screen and (max-width:768px) {
+  .topbox {
+    max-width: 100%;
+  }
+  body.close .content {
+    transform: translateX(50px);
+  }
+}
+
 .topbox td {
   vertical-align: top;
 }
@@ -161,6 +176,7 @@ input:focus {
 #topgif {
   width: 45%;
   max-width: 384px;
+  min-width: 256px;
 }
 
 video {

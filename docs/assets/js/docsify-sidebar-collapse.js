@@ -266,8 +266,8 @@
       document.querySelector('.sidebar').style.transform = 'translateX(0)';
       document.querySelector('.content').style.transform = 'translateX(0)';
     } else {
-      document.querySelector('.sidebar').style.transform = 'translateX(300px)';
-      document.querySelector('.content').style.transform = 'translateX(300px)';
+      document.querySelector('.sidebar').style.transform = 'translateX(400px)';
+      document.querySelector('.content').style.transform = 'translateX(400px)';
     }
   }
 
