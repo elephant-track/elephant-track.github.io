@@ -87,7 +87,21 @@ Please follow the instructions below to set them up.
 
 ### Setting up the ELEPHANT Server
 
-#### Prerequisite
+There are two options to set up the ELEPHANT server.
+
+- <a href="#/?id=setting-up-with-docker" onclick="alwaysScroll(event)">Setting up with Docker</a>
+  
+  This option is recommended if you have a powerful computer that satisfies <a href="#/?id=elephant-server-requirements" onclick="alwaysScroll(event)">the server requirements</a>.
+
+- <a href="#/?id=setting-up-with-google-colab" onclick="alwaysScroll(event)">Setting up with Google Colab</a>
+  
+  Alternatively, you can set up the ELEPHANT server with [Google Colab](https://research.google.com/colaboratory/faq.html), a freely available product from Google Research. In this option, you don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
+
+#### Setting up with Docker
+
+##### Prerequisite
+
+Please check that your computer meets <a href="#/?id=elephant-server-requirements" onclick="alwaysScroll(event)">the server requirements</a>.
 
 Install [Docker](https://www.docker.com/) with [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker).
 
@@ -104,7 +118,7 @@ Alternatively, you can set it at runtime.
 make ELEPHANT_DOCKER="sudo docker" bash
 ```
 
-#### 1.Download/Clone a repository
+##### 1.Download/Clone a repository
 
 Download and extract a [.zip file](https://github.com/elephant-track/elephant-server/releases/download/v0.1.0/elephant-server-0.1.0.zip).
 
@@ -114,7 +128,7 @@ Alternatively, you can clone a repository from [GitHub](https://github.com/eleph
 git clone https://github.com/elephant-track/elephant-server.git
 ```
 
-#### 2. Build a Docker image
+##### 2. Build a Docker image
 
 First, change the directory to the project root.
 
@@ -128,7 +142,7 @@ The following command will build a Docker image that integrates all the required
 make build
 ```
 
-#### 3. Generate a dataset for the ELEPHANT server
+##### 3. Generate a dataset for the ELEPHANT server
 
 Please [prepare](https://imagej.net/BigDataViewer.html#Exporting_from_ImageJ_Stacks) your image data, producing a pair of [BigDataViewer](https://imagej.net/BigDataViewer) `.h5` and `.xml` files, or [download the demo data](https://doi.org/10.5281/zenodo.4549193) and extract it as below.
 
@@ -202,7 +216,7 @@ make ELEPHANT_WORKSPACE="YOUR_DATASET_DIR" bash
 | Info <br> :information_source: | Multi-view data is not supported by ELEPHANT. You need to create a fused data (e.g. with [BigStitcher Fuse](https://imagej.net/BigStitcher_Fuse)) before converting to `.zarr` . |
 | :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-#### 4. Launch the ELEPHANT server via Docker
+##### 4. Launch the ELEPHANT server via Docker
 
 The ELEPHANT server is accompanied by several services, including [Flask](https://flask.palletsprojects.com/en/1.1.x/),
 [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/), [NGINX](https://www.nginx.com/), [redis](https://redis.io/)
@@ -215,6 +229,90 @@ make launch # launch the services
 ```
 
 Now, the ELEPHANT server is ready.
+
+#### Setting up with Google Colab
+
+##### 1. Prepare a Google account
+
+If you already have one, you can just use it. Otherwise, create a Google account [here](https://accounts.google.com/signup).
+
+##### 2. Create a ngrok account
+
+Create a ngrok account from the following link.
+
+[ngrok - secure introspectable tunnels to localhost](https://dashboard.ngrok.com/signup)
+
+##### 3. Open and run a Colab notebook
+
+Open a Colab notebook from this button. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elephant-track/elephant-server/blob/main/elephant_server.ipynb)
+
+On Goolge Colab, run the command [Runtime > Run all] and select `RUN ANYWAY` in the following box.
+
+<img src="_media/colab-warning.png"></img>
+
+##### 4. Start a ngrok tunnel
+
+After around 10 minutes, you will find the following box on the bottom of the page.
+
+<img src="_media/ngrok-box.png"></img>
+
+Click the link to open your ngrok account page and copy your authtoken, then paste it to the box above.
+
+<img src="_media/ngrok-authtoken.png"></img>
+
+After inputting your authtoken, you will have many lines of outputs. Scroll up and find the following two lines.
+
+```Colab
+SSH command: ssh -p[your_random_5digits] root@[your_random_value].tcp.ngrok.io
+Root password: [your_random_password]
+```
+
+##### 5. Establish connections from your computer to the server on Colab
+
+On your computer, launch a powershell (Windows) or terminal (Mac&Linux) and run the following command. Please leave the powershell/terminal window open.
+
+| Info <br> :information_source: | Please do not forget to replace `your_random_5digits` and `your_random value`. When you are asked a password, use the `your_random_password` found in the previous step. |
+| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+Windows:
+
+```Powershell
+ssh.exe -N -L 8080:localhost:80 -o PubkeyAuthentication=no -o TCPKeepAlive=yes -o ServerAliveInterval=30 -p[your_random_5digits] root@[your_random value].tcp.ngrok.io
+```
+
+Mac&Linux:
+
+```bash
+ssh -N -L 8080:localhost:80 -o PubkeyAuthentication=no -o TCPKeepAlive=yes -o ServerAliveInterval=30 -p[your_random_5digits] root@[your_random value].tcp.ngrok.io
+```
+
+Launch another powershell (Windows) or terminal (Mac&Linux) and run the following command. Please leave the powershell/terminal window open.
+
+Windows:
+
+```Powershell
+ssh.exe -N -L 5672:localhost:5672 -o PubkeyAuthentication=no -o TCPKeepAlive=yes -o ServerAliveInterval=30 -p[your_random_5digits] root@[your_random value].tcp.ngrok.io
+```
+
+Mac&Linux:
+
+```
+ssh -N -L 5672:localhost:5672 -o PubkeyAuthentication=no -o TCPKeepAlive=yes -o ServerAliveInterval=30 -p[your_random_5digits] root@[your_random value].tcp.ngrok.io
+```
+
+##### 6. Terminate
+
+When you finish using the ELEPHANT, stop and terminate your Colab runtime so that you can release your resources.
+
+- Stop the running execution by [Runtime > Interrupt execution]
+- Terminate the runtime by [Runtime > Manage sessions]
+
+<img src="_media/terminate-colab.png"></img>
+
+| Info <br> :information_source: | If you see the following message, it is likely that you exceeded the usage limits. Unfortunately, you cannot use Colab with GPU at the moment. See details <a href="https://research.google.com/colaboratory/faq.html#usage-limits">here</a> |
+| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+<img src="_media/colab-limits-warning.png"></img>
 
 
 ### Installing the ELEPHANT Client
@@ -1135,6 +1233,8 @@ After establishing these connections, the ELEPHANT client can communicate with t
   - [RabbitMQ](https://www.rabbitmq.com/)
   - [Supervisord](http://supervisord.org/)
   - [uwsgi-nginx-flask-docker](https://github.com/tiangolo/uwsgi-nginx-flask-docker)
+  - [ngrok](https://ngrok.com/)
+  - [Google Colab](https://colab.research.google.com)
 - ELEPHANT docs
   - [Docsify](https://docsify.js.org)
 
