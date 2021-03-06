@@ -286,6 +286,12 @@ Mac&Linux:
 ssh -N -L 8080:localhost:80 -o PubkeyAuthentication=no -o TCPKeepAlive=yes -o ServerAliveInterval=30 -p[your_random_5digits] root@[your_random value].tcp.ngrok.io
 ```
 
+Continue with `yes` if you are asked the following question.
+
+```
+Are you sure you want to continue connecting (yes/no)? 
+```
+
 Launch another powershell (Windows) or terminal (Mac&Linux) and run the following command. Please leave the powershell/terminal window open.
 
 Windows:
