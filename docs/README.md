@@ -413,15 +413,15 @@ we ask users to download and use a self-contained executable instead of the offi
 
 #### 1. Download an executable jar
 
-Please [download a zip file](https://github.com/elephant-track/elephant-client/releases/download/v0.1.0/elephant-0.1.0-client.zip) that contains the latest version of executable jar with dependencies in the `lib/` directory.
+Please [download a zip file](https://github.com/elephant-track/elephant-client/releases/download/v0.1.1/elephant-0.1.1-client.zip) that contains the latest version of executable jar with dependencies in the `lib/` directory.
 
 #### 2. Launch an application
 
-Double click the executable jar with the name `elephant-0.1.0-client.jar`.\
+Double click the executable jar with the name `elephant-0.1.1-client.jar`.\
 Alternatively, launch an application from CLI, which is better for debugging in case of problems.
 
 ```bash
-java -jar elephant-0.1.0-client.jar
+java -jar elephant-0.1.1-client.jar
 ```
 
 | Info <br> :information_source: | ELEPHANT is built with `openjdk version "1.8.0_275"`. It should work with Java Runtime Environment (JRE) version 8 or higher. <br> You can download a prebuilt OpdnJDK binary [here](https://adoptopenjdk.net/). |

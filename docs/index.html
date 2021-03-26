@@ -26,7 +26,7 @@
   <script>
     window.$docsify = {
       alias: {
-        '/v0.1.0/(.*)': '/$1',
+        '/v0.1/(.*)': '/$1',
         '/.*/_sidebar.md': '/_sidebar.md',
       },
       name: '<a id="logo-link" class="app-name-link" data-nosearch href="/" onclick="alwaysScrollToTop();"><div class="sidebar-logo">' +
@@ -35,7 +35,7 @@
         '</div></a>' +
         '<select id="version-selector" name="version" class="sidebar-version-select">' +
         '<option value="">latest</option>' +
-        '<option value="v0.1.0">v0.1.0</option>' +
+        '<option value="v0.1">v0.1</option>' +
         '</select>' +
         '</div>',
       repo: 'https://github.com/elephant-track',
@@ -55,8 +55,8 @@
       namespaces: [
         {
           id: "version",
-          values: ["v0.1.0"],
-          default: "v0.1.0",
+          values: ["v0.1"],
+          default: "v0.1",
           optional: true,
           selector: "#version-selector"
         }
