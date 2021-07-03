@@ -69,7 +69,7 @@ Please find <a href="#/?id=system-requirements" onclick="alwaysScroll(event)">be
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Operating System | Linux, Mac or Windows OS                                                                                                  |
 | Java             | Java Runtime Environment 8 or higher                                                                                      |
-| Storage          | Sufficient size for your data (Please consider using [BigDataServer](https://imagej.net/BigDataServer) for the huge data) |
+| Storage          | Sufficient size for your data (Please consider using [BigDataServer](https://imagej.net/plugins/bdv/server) for the huge data) |
 
 ## ELEPHANT Data Overview
 
@@ -156,9 +156,9 @@ make build
 
 ##### 3. Generate a dataset for the ELEPHANT server
 
-Please [prepare](https://imagej.net/BigDataViewer.html#Exporting_from_ImageJ_Stacks) your image data, producing a pair of [BigDataViewer](https://imagej.net/BigDataViewer) `.h5` and `.xml` files, or [download the demo data](https://doi.org/10.5281/zenodo.4549193) and extract it as below.
+Please [prepare](https://imagej.net/plugins/bdv/#exporting-from-imagej-stacks) your image data, producing a pair of [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` and `.xml` files, or [download the demo data](https://doi.org/10.5281/zenodo.4549193) and extract it as below.
 
-The ELEPHANT server deals with images using [Zarr](https://zarr.readthedocs.io/en/stable/). The following command generates required `zarr` files from the [BigDataViewer](https://imagej.net/BigDataViewer) `.h5` file.
+The ELEPHANT server deals with images using [Zarr](https://zarr.readthedocs.io/en/stable/). The following command generates required `zarr` files from the [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` file.
 
 
 ```bash
@@ -225,7 +225,7 @@ make bash
 make ELEPHANT_WORKSPACE="YOUR_WORKSPACE_DIR" bash
 ```
 
-| Info <br> :information_source: | Multi-view data is not supported by ELEPHANT. You need to create a fused data (e.g. with [BigStitcher Fuse](https://imagej.net/BigStitcher_Fuse)) before converting to `.zarr` . |
+| Info <br> :information_source: | Multi-view data is not supported by ELEPHANT. You need to create a fused data (e.g. with [BigStitcher Fuse](https://imagej.net/plugins/bigstitcher/fuse)) before converting to `.zarr` . |
 | :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ##### 4. Launch the ELEPHANT server via Docker
@@ -406,7 +406,7 @@ When you finish using the ELEPHANT, stop and terminate your Colab runtime so tha
 
 The ELEPHANT client works as a plugin for [Mastodon](https://github.com/mastodon-sc/mastodon).
 However, because ELEPHANT was built on a specific version of Mastodon, with minor customization,
-we ask users to download and use a self-contained executable instead of the official release available on [Fiji](https://imagej.net/Fiji).
+we ask users to download and use a self-contained executable instead of the official release available on [Fiji](https://imagej.net/software/fiji/).
 
 | Info <br> :information_source: | Mastodon user manual is available [here](https://github.com/mastodon-sc/mastodon-manual/blob/pdf/MastodonManual.pdf). |
 | :----------------------------: | :-------------------------------------------------------------------------------------------------------------------- |
