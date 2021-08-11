@@ -41,275 +41,86 @@ Please find <a href="#/?id=system-requirements" onclick="alwaysScroll(event)">be
   <a href="javascript:void(0)" onClick="setImageVisible(event, 'elephant-architecture')">image</a>
 </div>
 
-## System Requirements
-
-### ELEPHANT Server Requirements (Docker)
-
-|                  | Requirements                                                                                                                                                                                                                                                                                |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Operating System | Linux-based OS compatible with [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)                                                                                                                                             |
-| Docker           | [Docker](https://www.docker.com/) with [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) (see [supported versions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#container-runtimes)) |
-| GPU              | NVIDIA CUDA GPU with sufficient VRAM for your data (recommended: 11 GB or higher)                                                                                                                                                                                                           |
-| Storage          | Sufficient size for your data (recommended: 1 TB or higher)                                                                                                                                                                                                                                 |
-### ELEPHANT Server Requirements (Singularity)
-
-|                  | Requirements                                                                                                                                                    |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Operating System | Linux-based OS                                                                                                                                                  |
-| Singularity      | [Singularity](https://sylabs.io/guides/3.7/user-guide/index.html) (see [requirements for NVIDIA GPUs & CUDA](https://sylabs.io/guides/3.7/user-guide/gpu.html)) |
-| GPU              | NVIDIA CUDA GPU with sufficient VRAM for your data (recommended: 11 GB or higher)                                                                               |
-| Storage          | Sufficient size for your data (recommended: 1 TB or higher)                                                                                                     |
-
-| Info <br> :information_source: | The total amount of data can be 10-30 times larger than the original data size when the prediction outputs (optional) are generated. |
-| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------- |
-
-### ELEPHANT Client Requirements
-
-|                  | Requirements                                                                                                              |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Operating System | Linux, Mac or Windows OS                                                                                                  |
-| Java             | Java Runtime Environment 8 or higher                                                                                      |
-| Storage          | Sufficient size for your data (Please consider using [BigDataServer](https://imagej.net/plugins/bdv/server) for the huge data) |
-
-## ELEPHANT Data Overview
-
-The ELEPHANT client uses the same type of image files as Mastodon. The image data are imported as a pair of HDF5 (`.h5`) and XML (`.xml`)
-files from BigDataViewer (BDV).
-
-The ELEPHANT server stores image, annotation and prediction data in Zarr (`.zarr`) format.
-
-| Data type                  | Client                         | Server         |
-| -------------------------- | ------------------------------ | -------------- |
-| Image                      | HDF5 (`.h5`)                   | Zarr (`.zarr`) |
-| Image metadata             | XML (`.xml`)                   | Not available  |
-| Annotation                 | Mastodon project (`.mastodon`) | Zarr (`.zarr`) |
-| Prediction                 | Mastodon project (`.mastodon`) | Zarr (`.zarr`) |
-| Project metadata           | Mastodon project (`.mastodon`) | Not available  |
-| Viewer settings (Optional) | XML (`.xml`)                   | Not available  |
-
-
 ## Getting Started
 
-ELEPHANT's server and client are organized separately.
-Please follow the instructions below to set them up.
+The latest version of ELEPHANT is distributed using [Fiji](https://imagej.net/software/fiji/).
+
+### Prerequisite
+
+Please install [Fiji](https://imagej.net/software/fiji/) on your system and update the components using [ImageJ updater](https://imagej.net/plugins/updater).
+
+### Installation
+
+1. Start [Fiji](https://imagej.net/software/fiji/).
+2. Run `Help > Update...` from the menu bar.
+3. Click on the button `Manage update sites`.
+4. Tick the checkbox for the update site Mastodon.
+
+  <img src="_media/manage-update-sites-mastodon.png"></img>
+
+5. Click on the button `Add update site` and add the following entry with the checkbox ticked.
+
+  | Name     | URL                                |
+  | -------- | ---------------------------------- |
+  | ELEPHANT | https://sites.imagej.net/ELEPHANT/ |
+
+  <img src="_media/manage-update-sites-elephant.png"></img>
+
+6. Click on the button `Close` in the dialog `Manage update sites`.
+7. Click on the button `Apply changes` in the dialog `ImageJ Updater`.
+8. Restart [Fiji](https://imagej.net/software/fiji/).
+
+### Prepare a Mastodon project
+
+To start working with ELEPHANT, you need to prepare a Mastodon project.
+
+#### 1. Prepare image data in the BDV format
+
+[Download the demo data](https://sandbox.zenodo.org/record/897403) and extract the files as below.
+
+```bash
+elephant-demo
+├── elephant-demo.h5
+└── elephant-demo.xml
+```
+
+Alternatively, you can follow [the instructions here](https://imagej.net/plugins/bdv/#exporting-from-imagej-stacks) to prepare these files for your own data.
+
+| Info <br> :information_source: | ELEPHANT provides a command line interface to convert image data stored in [Cell Tracking Challenge](http://celltrackingchallenge.net/) style to the BDV format. |
+| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+```bash
+Fiji.app/ImageJ-linux64 --ij2 --headless --console --run Fiji.app/scripts/ctc2bdv.groovy "input='CTC_TIF_DIR', output='YOUR_DATA.xml', sizeX=0.32, sizeY=0.32, sizeZ=2.0, unit='µm'"
+```
+
+#### 2. Create a project
+
+Click the `new Mastodon project` button in the `Mastodon launcher` window and click the `browse` button on the right.
+
+Specify the `.xml` file for the dataset and click the `create` button on the bottom right.
+
+<img src="_media/create-project.png"></img>
+
+Now, you will see the main window as shown below.
+
+<img src="_media/main-window.png"></img>
+
+#### 3. Save & load a Mastodon project
+
+To save the project, you can either run `File > Save Project`, click the `save`/`save as...` button in the main window, or use the shortcut `S`, generate a `.mastodon` file.
+
+A `.mastodon` project file can be loaded by running `File > Load Project` or clicking the `open Mastodon project` button in the `Mastodon launcher` window.
 
 ### Setting up the ELEPHANT Server
 
-There are three options to set up the ELEPHANT server.
+Please open `Control Panel` from `Plugins > ELEPHANT > Window > Control Panel`.
 
-- <a href="#/?id=setting-up-with-docker" onclick="alwaysScroll(event)">Setting up with Docker</a>
-  
-  This option is recommended if you have a powerful computer that satisfies <a href="#/?id=elephant-server-requirements-docker" onclick="alwaysScroll(event)">the server requirements (Docker)</a> with root privileges.
+`Control Panel` shows the statuses of the servers (ELEPHANT server and [RabbitMQ server](https://www.rabbitmq.com/)).\
+It also provides functions for setting up the servers.
 
-- <a href="#/?id=setting-up-with-singularity" onclick="alwaysScroll(event)">Setting up with Singularity</a>
-  
-  This option is recommended if you can access a powerful computer that satisfies <a href="#/?id=elephant-server-requirements-singularity" onclick="alwaysScroll(event)">the server requirements (Singularity)</a> as a non-root user (e.g. HPC cluster).
+<img src="_media/control-panel-default.png"></img>
 
-- <a href="#/?id=setting-up-with-google-colab" onclick="alwaysScroll(event)">Setting up with Google Colab</a>
-  
-  Alternatively, you can set up the ELEPHANT server with [Google Colab](https://research.google.com/colaboratory/faq.html), a freely available product from Google Research. In this option, you don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
-
-#### Setting up with Docker
-
-##### Prerequisite
-
-Please check that your computer meets <a href="#/?id=elephant-server-requirements" onclick="alwaysScroll(event)">the server requirements</a>.
-
-Install [Docker](https://www.docker.com/) with [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker).
-
-By defaut, ELEPHANT assumes you can [run Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/).\
-If you need to run `Docker` with `sudo`, please set the environment variable `ELEPHANT_DOCKER` as below.
-
-```bash
-export ELEPHANT_DOCKER="sudo docker"
-```
-
-Alternatively, you can set it at runtime.
-
-```bash
-make ELEPHANT_DOCKER="sudo docker" bash
-```
-
-##### 1.Download/Clone a repository
-
-Download and extract a [.zip file](https://github.com/elephant-track/elephant-server/releases/download/v0.1.0/elephant-server-0.1.0.zip).
-
-Alternatively, you can clone a repository from [GitHub](https://github.com/elephant-track/elephant-server).
-
-```bash
-git clone https://github.com/elephant-track/elephant-server.git
-```
-
-##### 2. Build a Docker image
-
-First, change the directory to the project root.
-
-```bash
-cd elephant-server-0.1.0
-```
-
-The following command will build a Docker image that integrates all the required modules.
-
-```bash
-make build
-```
-
-##### 3. Generate a dataset for the ELEPHANT server
-
-Please [prepare](https://imagej.net/plugins/bdv/#exporting-from-imagej-stacks) your image data, producing a pair of [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` and `.xml` files, or [download the demo data](https://doi.org/10.5281/zenodo.4549193) and extract it as below.
-
-The ELEPHANT server deals with images using [Zarr](https://zarr.readthedocs.io/en/stable/). The following command generates required `zarr` files from the [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` file.
-
-
-```bash
-workspace
-├── datasets
-│   └── elephant-demo
-│       ├── elephant-demo.h5
-│       └── elephant-demo.xml
-```
-
-Run the script inside a Docker container.
-
-```bash
-make bash # run bash inside a docker container
-```
-
-```bash
-python /opt/elephant/script/dataset_generator.py --uint16 /workspace/datasets/elephant-demo/elephant-demo.h5 /workspace/datasets/elephant-demo
-# usage: dataset_generator.py [-h] [--uint16] [--divisor DIVISOR] input output
-
-# positional arguments:
-#   input              input .h5 file
-#   output             output directory
-
-# optional arguments:
-#   -h, --help         show this help message and exit
-#   --uint16           with this flag, the original image will be stored with
-#                      uint16
-#                      default: False (uint8)
-#   --divisor DIVISOR  divide the original pixel values by this value (with
-#                      uint8, the values should be scale-downed to 0-255)
-
-exit # exit from a docker container
-```
-
-You will find the following results.
-
-```
-workspace
-├── datasets
-│   └── elephant-demo
-│       ├── elephant-demo.h5
-│       ├── elephant-demo.xml
-│       ├── flow_hashes.zarr
-│       ├── flow_labels.zarr
-│       ├── flow_outputs.zarr
-│       ├── imgs.zarr
-│       ├── seg_labels_vis.zarr
-│       ├── seg_labels.zarr
-│       └── seg_outputs.zarr
-```
-
-| Info <br> :information_source: | By default, the docker container is launched with [volumes](https://docs.docker.com/storage/volumes/), mapping the local `workspace/` directory to the `/workspace/` directory in the container. <br> The local workspace directory can be set by the `ELEPHANT_WORKSPACE` environment variable (Default: `${PWD}/workspace`). |
-| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-
-```bash
-# This is optional
-export ELEPHANT_WORKSPACE="YOUR_WORKSPACE_DIR"
-make bash
-```
-
-```bash
-# This is optional
-make ELEPHANT_WORKSPACE="YOUR_WORKSPACE_DIR" bash
-```
-
-| Info <br> :information_source: | Multi-view data is not supported by ELEPHANT. You need to create a fused data (e.g. with [BigStitcher Fuse](https://imagej.net/plugins/bigstitcher/fuse)) before converting to `.zarr` . |
-| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-
-##### 4. Launch the ELEPHANT server via Docker
-
-The ELEPHANT server is accompanied by several services, including [Flask](https://flask.palletsprojects.com/en/1.1.x/),
-[uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/), [NGINX](https://www.nginx.com/), [redis](https://redis.io/)
-and [RabbitMQ](https://www.rabbitmq.com/).
-These services are organized by [Supervisord](http://supervisord.org/) inside the Docker container,
-exposing the port `8080` for [NGINX](https://www.nginx.com/) and `5672` for [RabbitMQ](https://www.rabbitmq.com/) available on `localhost`. 
-
-```bash
-make launch # launch the services
-```
-
-Now, the ELEPHANT server is ready.
-
-#### Setting up with Singularity
-
-##### Prerequisite
-
-`Singularity >= 3.6.0` is required. Please check the version of Singularity on your system.
-
-```bash
-singularity --version
-```
-
-Please [download the release `v0.1.0-singularity`](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.1.0-singularity.zip), or checkout the tag `v0.1.0-singularity` on Git to follow the instructions below.
-
-##### 1. Build a container
-
-Run the following command at the project root directory where you can find a `elephant.def` file.
-
-```bash
-singularity build --fakeroot elephant.sif elephant.def
-```
-
-##### 2. Prepare files to bind
-
-The following command copies `/var/lib/`, `/var/log/` and `/var/run/` in the container to `$HOME/.elephant_binds` on the host.
-
-```bash
-singularity run --fakeroot elephant.sif
-```
-
-##### 3. Start an instance for the ELEPHANT server
-
-It is recommended to launch the ELEPHANT server inside a singularity `instance` rather than using `shell` or `exec` directly, which can make some processes alive after exiting the `supervisor` process. All processes inside a `instance` can be terminated by stopping the `instance` ([see details](https://sylabs.io/guides/3.7/user-guide/running_services.html#container-instances-in-singularity)).
-
-The command below starts an `instance` named `elephant` using the image written in `elephant.sif`.\
-The `--nv` option is required to set up the container that can use NVIDIA GPU and CUDA ([see details](https://sylabs.io/guides/3.7/user-guide/gpu.html)).\
-The `--bind` option specifies the directories to bind from the host to the container ([see details](https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html)). The files copied in the previous step are bound to the original container location as `writable` files. Please set `$ELEPHANT_WORKSPACE` to the `workspace` directory on your system.
-
-```bash
-singularity instance start --nv --bind $HOME/.elephant_binds/var/lib:/var/lib,$HOME/.elephant_binds/var/log:/var/log,$HOME/.elephant_binds/var/run:/var/run,$ELEPHANT_WORKSPACE:/workspace elephant.sif elephant
-```
-
-##### 4. Generate a dataset for the ELEPHANT server
-
-The following command will generate a dataset for the ELEPHANT server.
-Please see details in <a href="#/?id=_3-generate-a-dataset-for-the-elephant-server" onclick="alwaysScroll(event)">the Docker part</a>.
-
-```bash
-singularity exec instance://elephant python /opt/elephant/script/dataset_generator.py --uint16 /workspace/datasets/elephant-demo/elephant-demo.h5 /workspace/datasets/elephant-demo
-```
-
-##### 5. Launch the ELEPHANT server
-
-The following command execute a script that launches the ELEPHANT server.
-Please specify the `SINGULARITYENV_CUDA_VISIBLE_DEVICES` if you want to use a specific GPU device on your system (default: `0`).
-
-```bash
-SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity exec instance://elephant /start.sh
-```
-
-At this point, you will be able to work with the ELEPHANT server.
-Please follow <a href="#/?id=remote-connection-to-the-elephant-server" onclick="alwaysScroll(event)">the instructions for seting up the remote connection</a>.
-
-##### 6. Stop an instance for the ELEPHANT server
-
-After exiting the `exec` by `Ctrl+C`, please do not forget to stop the `instance`.
-
-```bash
-singularity instance stop elephant
-```
+Here, we will set up the servers using [Google Colab](https://research.google.com/colaboratory/faq.html), a freely available product from Google Research. You don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
 
 #### Setting up with Google Colab
 
@@ -325,7 +136,7 @@ Create a ngrok account from the following link.
 
 ##### 3. Open and run a Colab notebook
 
-Open a Colab notebook from this button. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elephant-track/elephant-server/blob/main/elephant_server.ipynb)
+Open a Colab notebook from this button. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elephant-track/elephant-server/blob/dev/elephant_server.ipynb)
 
 On Goolge Colab, run the command [Runtime > Run all] and select `RUN ANYWAY` in the following box.
 
@@ -344,55 +155,27 @@ Click the link to open your ngrok account page and copy your authtoken, then pas
 After inputting your authtoken, you will have many lines of outputs. Scroll up and find the following two lines.
 
 ```Colab
-SSH command: ssh -p[your_random_5digits] root@[your_random_value].tcp.ngrok.io
+*** SSH information *** 
+SSH user: root	SSH host: [your_random_value].tcp.ngrok.io	SSH port: [your_random_5digits]
 Root password: [your_random_password]
 ```
 
-##### 5. Establish connections from your computer to the server on Colab
+##### 5. Establish connections from your computer to the servers on Colab
 
-On your computer, launch a powershell (Windows) or terminal (Mac&Linux) and run the following command. Please leave the powershell/terminal window open.
+Go back to `Control Panel` and change the values of `SSH host` and `SSH port` according to the output from Colab. You can leave other fields as default.\
+Click the `Add Port Forward` button to establish the connection to the ELEPHANT server. Click `yes` for a warning dialog and enter your password shown on Colab when asked for it.\
+Subsequently, change `Local port` to `5672` and `Remote port` to `5672` and click the `Add Port Forward` button to the RabbitMQ server.
 
-| Info <br> :information_source: | Please do not forget to replace `your_random_5digits` and `your_random value`. When you are asked a password, use the `your_random_password` found in the previous step. |
-| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+If everything is ok, you will see green signals in `Control Panel`.
 
-Windows:
-
-```Powershell
-ssh.exe -N -L 8080:localhost:80 -o PubkeyAuthentication=no -o TCPKeepAlive=yes -o ServerAliveInterval=30 -p[your_random_5digits] root@[your_random value].tcp.ngrok.io
-```
-
-Mac&Linux:
-
-```bash
-ssh -N -L 8080:localhost:80 -o PubkeyAuthentication=no -o TCPKeepAlive=yes -o ServerAliveInterval=30 -p[your_random_5digits] root@[your_random value].tcp.ngrok.io
-```
-
-Continue with `yes` if you are asked the following question.
-
-```
-Are you sure you want to continue connecting (yes/no)? 
-```
-
-Launch another powershell (Windows) or terminal (Mac&Linux) and run the following command. Please leave the powershell/terminal window open.
-
-Windows:
-
-```Powershell
-ssh.exe -N -L 5672:localhost:5672 -o PubkeyAuthentication=no -o TCPKeepAlive=yes -o ServerAliveInterval=30 -p[your_random_5digits] root@[your_random value].tcp.ngrok.io
-```
-
-Mac&Linux:
-
-```
-ssh -N -L 5672:localhost:5672 -o PubkeyAuthentication=no -o TCPKeepAlive=yes -o ServerAliveInterval=30 -p[your_random_5digits] root@[your_random value].tcp.ngrok.io
-```
+<img src="_media/control-panel-established.png"></img>
 
 ##### 6. Terminate
 
 When you finish using the ELEPHANT, stop and terminate your Colab runtime so that you can release your resources.
 
-- Stop the running execution by [Runtime > Interrupt execution]
-- Terminate the runtime by [Runtime > Manage sessions]
+- Stop the running execution by `Runtime > Interrupt execution`
+- Terminate the runtime by `Runtime > Manage sessions`
 
 <img src="_media/terminate-colab.png"></img>
 
@@ -401,59 +184,8 @@ When you finish using the ELEPHANT, stop and terminate your Colab runtime so tha
 
 <img src="_media/colab-limits-warning.png"></img>
 
-
-### Installing the ELEPHANT Client
-
-The ELEPHANT client works as a plugin for [Mastodon](https://github.com/mastodon-sc/mastodon).
-However, because ELEPHANT was built on a specific version of Mastodon, with minor customization,
-we ask users to download and use a self-contained executable instead of the official release available on [Fiji](https://imagej.net/software/fiji/).
-
-| Info <br> :information_source: | Mastodon user manual is available [here](https://github.com/mastodon-sc/mastodon-manual/blob/pdf/MastodonManual.pdf). |
-| :----------------------------: | :-------------------------------------------------------------------------------------------------------------------- |
-
-#### 1. Download an executable jar
-
-Please [download a zip file](https://github.com/elephant-track/elephant-client/releases/download/v0.1.1/elephant-0.1.1-client.zip) that contains the latest version of executable jar with dependencies in the `lib/` directory.
-
-#### 2. Launch an application
-
-Double click the executable jar with the name `elephant-0.1.1-client.jar`.\
-Alternatively, launch an application from CLI, which is better for debugging in case of problems.
-
-```bash
-java -jar elephant-0.1.1-client.jar
-```
-
-| Info <br> :information_source: | ELEPHANT is built with `openjdk version "1.8.0_275"`. It should work with Java Runtime Environment (JRE) version 8 or higher. <br> You can download a prebuilt OpdnJDK binary [here](https://adoptopenjdk.net/). |
-| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-
-A main window will be shown as below.
-
-<img src="_media/main-window.png"></img>
-
-### Create a Mastodon project
-
-#### 1. Locate the dataset to work with
-
-First, please locate <a href="#/?id=_3-generate-a-dataset-for-the-elephant-server" onclick="alwaysScroll(event)">the BDV dataset</a> you prepared for the server.
-
-#### 2. Create a new project
-
-Click the `new project` button in the main window.
-
-Please specify the `.xml` file for the dataset.
-
-<img src="_media/create-project.png"></img>
-
-Now, you will see that all buttons are availble on the main window.
-
-<img src="_media/main-window-all.png"></img>
-
-#### 3. Save & load a Mastodon project
-
-You can save a project by [File > Save Project], `save project` button in the main dialog or shortcut `S`, generating a `.mastodon` file.
-
-A `.mastodon` project file can be loaded by [File > Load Project] or `load project` button in the main dialog
+| Info <br> :information_source: | Advanced options for the server setup can be found <a href="#/?id=advanced-options-for-the-elephant-server" onclick="alwaysScroll(event)">here</a> |
+| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ### Working with a BigDataViewer (BDV) window
 
@@ -463,22 +195,13 @@ Click the `bdv` button in the main window.
 
 The following window will pop up.
 
-<img src="_media/bdv-window.png"></img>
+<img src="_media/bdv-window.png" height="512"></img>
 
 #### 2. Shortcuts
 
-ELEPHANT inherits the user-friendly [shortcuts](https://github.com/mastodon-sc/mastodon#actions-and-keyboard-shortcuts) from Mastodon.
-Please install the shortcut setting by copying <a href="_media/elephant_keymaps.yaml" download>this file</a> to the `~/.mastodon/keymaps/` directory and editing the `~/.mastodon/keymaps/keymaps.yaml` file as below.
+ELEPHANT inherits the user-friendly [shortcuts](https://github.com/mastodon-sc/mastodon#actions-and-keyboard-shortcuts) from Mastodon. To follow this documentation, please find the `Keymap` tab from `File > Preferences...` and select the `Elephant` keymap from the pull down list.
 
-| Info <br> :information_source: | If you cannot find the `~/.mastodon/keymaps/` directory, please run [File > Preferences...] first to create it with the `~/.mastodon/keymaps/keymaps.yaml`. |
-| :----------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-
-```yaml
-!keymapslist
-defaultKeymapName: Elephant
-keymapNameToFileName:
-  Elephant: elephant_keymaps.yaml
-```
+<img src="_media/keymap.png" height="512"></img>
 
 The following table summaraizes the frequently-used actions used in the BDV window.
 
@@ -517,30 +240,23 @@ Please put all BDV windows in the same group by clicking the key icon <img src="
 
 #### 4. Tagging spots
 
-The tagging function of Mastodon can provide specific information on each spot. ELEPHANT will use the **Tag** information for processing.
+Spots can be colored based on their status by selecting the **Detection** coloring mode in `View > Coloring > Detection`.
 
-In the detection workflow, the **Detection** tag set is used (See <a href="#/?id=tag-sets-available-on-elephant" onclick="alwaysScroll(event)">below</a> for all provided tag sets available on ELEPHANT).
+| Status      | Color   |
+| ----------- | ------- |
+| Accepted    | Cyan    |
+| Rejected    | Magenta |
+| Unevaluated | Green   |
 
-Spots can be colored based on their tags by selecting the Detection coloring mode in [View > Coloring > Detection].
+ELEPHANT provides the following shortcut keys for annotating spots.
 
-<img src="_media/proofreading-with-caption.png" height="384"></img>
+| Action  | Shortcut |
+| ------- | -------- |
+| Accepte | 4        |
+| Rejecte | 5        |
 
-ELEPHANT provides the following shortcut keys for annotating spots with the **Detection** tag.
-
-| Tag       | Shortcut |
-| --------- | -------- |
-| tp        | 4        |
-| fp        | 5        |
-| tn        | 6        |
-| fn        | 7        |
-| tb        | 8        |
-| fb        | 9        |
-| unlabeled | 0        |
-
-| Info <br> :information_source: | Border annotations (`tb` and `fb`) are not so frequently used but they are helpful to separate attaching spots. |
-| :----------------------------: | :-------------------------------------------------------------------------------------------------------------- |
-
-Predicted spots and manually added spots are tagged by default as `unlabeled` and `fn`, respectively.
+| Info <br> :information_source: | For advanced users: Please check <a href="#/?id=tag-sets-available-on-elephant" onclick="alwaysScroll(event)">here</a> |
+| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------- |
 
 <video controls>
   <source src="_media/annotation-with-shortcuts.mp4" type="video/mp4">
@@ -558,7 +274,7 @@ Link annotations can be added in the following four ways on the BDV window; pres
 
 Spots and links that are added manually in this fashion are automatically tagged as `Approved` in the `Tracking` tag set.
 
-To visualize the `Tracking` tag, set the coloring mode to `Tracking` by [View > Coloring > Tracking].
+To visualize the `Tracking` tag, set the coloring mode to `Tracking` by `View > Coloring > Tracking`.
 
 <video controls>
   <source src="_media/linking-annotation.mp4" type="video/mp4">
@@ -569,9 +285,9 @@ To visualize the `Tracking` tag, set the coloring mode to `Tracking` by [View > 
 
 #### 1. Settings
 
-Open a Preferences dialog [Plugins > ELEPHANT > Preferences...].
+Open a Preferences dialog `Plugins > ELEPHANT > Preferences...`.
 
-<img src="_media/main-settings.png" height="384"></img>
+<img src="_media/main-settings.png" height="512"></img>
 
 Change the dataset name to `elephant-demo` (or the name you specified for your dataset).
 
@@ -588,13 +304,15 @@ Please check <a href="#/?id=settings-parameters" onclick="alwaysScroll(event)">t
 
 #### 2. Initialize a model
 
-First, you need to initialize a model by [Plugins > ELEPHANT > Detection > Reset Seg Model].
+First, you need to initialize a model by `Plugins > ELEPHANT > Detection > Reset Seg Model`.
 
 This command creates a new model parameter file with the name you specified in the settings (`seg.pth` by default) in the `workspace/models/` directory, which lies in the directory you launched on the server. At the initialization step, the model parameters are pre-trained with the fluorescence image itself, without any annotations. This will take ~20 seconds.
 
+The first time you run the command with new data, you will be asked if you want to initialize the dataset.
+
 #### 3. Prediction
 
-After initialization of a model you can try a prediction. [Plugins > ELEPHANT > Detection > Predict Spots]
+After initialization of a model you can try a prediction. `Plugins > ELEPHANT > Detection > Predict Spots`
 
 We cannot expect too much at this point, but the software will generate some predictions.
 
@@ -609,7 +327,7 @@ Based on the prediction results, you can add annotations as described earlier.
 
 <img src="_media/training-batch-before.png"></img>
 
-Train the model by [Plugins > ELEPHANT > Detection > Train Selected Timpepoints].
+Train the model by `Plugins > ELEPHANT > Detection > Train Selected Timpepoints`.
 
 Predictions with the updated model should yield better results.
 
@@ -621,7 +339,7 @@ In general, a batch mode is used for training with relatively large amounts of d
 
 In live mode, you can iterate the cycles of annotation, training, prediction and proofreading more frequently.
 
-Start live mode by [Plugins > ELEPHANT > Detection > Live Training].
+Start live mode by `Plugins > ELEPHANT > Detection > Live Training`.
 
 During live mode, you can find the text "live mode" on top of the BDV view.
 
@@ -952,6 +670,28 @@ If you start training from scratch, it will take relatively long time to get the
     </tr>
   </tbody>
 </table>
+
+## Tag details
+
+The tagging function of Mastodon can provide specific information on each spot. ELEPHANT uses the **Tag** information for processing.
+
+In the detection workflow, the **Detection** tag set is used (See <a href="#/?id=tag-sets-available-on-elephant" onclick="alwaysScroll(event)">below</a> for all provided tag sets available on ELEPHANT).
+
+| Tag       | Shortcut |
+| --------- | -------- |
+| tp        | 4        |
+| fp        | 5        |
+| tn        | 6        |
+| fn        | 7        |
+| tb        | 8        |
+| fb        | 9        |
+| unlabeled | 0        |
+
+<img src="_media/proofreading-with-caption.png" height="384"></img>
+
+Predicted spots and manually added spots are tagged by default as `unlabeled` and `fn`, respectively.
+
+These tags are used for training, where **true** spots and **false** spots can have different weights for training.
 
 ## Tag sets available on ELEPHANT
 
@@ -1286,6 +1026,270 @@ By default, ELEPHANT generates and uses the following tag sets.
     </tr>
   </tbody>
 </table>
+
+## System Requirements
+
+### ELEPHANT Server Requirements (Docker)
+
+|                  | Requirements                                                                                                                                                                                                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Operating System | Linux-based OS compatible with [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)                                                                                                                                             |
+| Docker           | [Docker](https://www.docker.com/) with [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) (see [supported versions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#container-runtimes)) |
+| GPU              | NVIDIA CUDA GPU with sufficient VRAM for your data (recommended: 11 GB or higher)                                                                                                                                                                                                           |
+| Storage          | Sufficient size for your data (recommended: 1 TB or higher)                                                                                                                                                                                                                                 |
+### ELEPHANT Server Requirements (Singularity)
+
+|                  | Requirements                                                                                                                                                    |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Operating System | Linux-based OS                                                                                                                                                  |
+| Singularity      | [Singularity](https://sylabs.io/guides/3.7/user-guide/index.html) (see [requirements for NVIDIA GPUs & CUDA](https://sylabs.io/guides/3.7/user-guide/gpu.html)) |
+| GPU              | NVIDIA CUDA GPU with sufficient VRAM for your data (recommended: 11 GB or higher)                                                                               |
+| Storage          | Sufficient size for your data (recommended: 1 TB or higher)                                                                                                     |
+
+| Info <br> :information_source: | The total amount of data can be 10-30 times larger than the original data size when the prediction outputs (optional) are generated. |
+| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------- |
+
+### ELEPHANT Client Requirements
+
+|                  | Requirements                                                                                                                   |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Operating System | Linux, Mac or Windows OS                                                                                                       |
+| Java             | Java Runtime Environment 8 or higher                                                                                           |
+| Storage          | Sufficient size for your data (Please consider using [BigDataServer](https://imagej.net/plugins/bdv/server) for the huge data) |
+
+## ELEPHANT Data Overview
+
+The ELEPHANT client uses the same type of image files as Mastodon. The image data are imported as a pair of HDF5 (`.h5`) and XML (`.xml`)
+files from BigDataViewer (BDV).
+
+The ELEPHANT server stores image, annotation and prediction data in Zarr (`.zarr`) format.
+
+| Data type                  | Client                         | Server         |
+| -------------------------- | ------------------------------ | -------------- |
+| Image                      | HDF5 (`.h5`)                   | Zarr (`.zarr`) |
+| Image metadata             | XML (`.xml`)                   | Not available  |
+| Annotation                 | Mastodon project (`.mastodon`) | Zarr (`.zarr`) |
+| Prediction                 | Mastodon project (`.mastodon`) | Zarr (`.zarr`) |
+| Project metadata           | Mastodon project (`.mastodon`) | Not available  |
+| Viewer settings (Optional) | XML (`.xml`)                   | Not available  |
+
+## Advanced options for the ELEPHANT Server
+
+There are three options to set up the ELEPHANT server.
+
+- <a href="#/?id=setting-up-with-docker" onclick="alwaysScroll(event)">Setting up with Docker</a>
+  
+  This option is recommended if you have a powerful computer that satisfies <a href="#/?id=elephant-server-requirements-docker" onclick="alwaysScroll(event)">the server requirements (Docker)</a> with root privileges.
+
+- <a href="#/?id=setting-up-with-singularity" onclick="alwaysScroll(event)">Setting up with Singularity</a>
+  
+  This option is recommended if you can access a powerful computer that satisfies <a href="#/?id=elephant-server-requirements-singularity" onclick="alwaysScroll(event)">the server requirements (Singularity)</a> as a non-root user (e.g. HPC cluster).
+
+- <a href="#/?id=setting-up-with-google-colab" onclick="alwaysScroll(event)">Setting up with Google Colab</a>
+  
+  Alternatively, you can set up the ELEPHANT server with [Google Colab](https://research.google.com/colaboratory/faq.html), a freely available product from Google Research. In this option, you don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
+
+#### Setting up with Docker
+
+##### Prerequisite
+
+Please check that your computer meets <a href="#/?id=elephant-server-requirements" onclick="alwaysScroll(event)">the server requirements</a>.
+
+Install [Docker](https://www.docker.com/) with [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker).
+
+By defaut, ELEPHANT assumes you can [run Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/).\
+If you need to run `Docker` with `sudo`, please set the environment variable `ELEPHANT_DOCKER` as below.
+
+```bash
+export ELEPHANT_DOCKER="sudo docker"
+```
+
+Alternatively, you can set it at runtime.
+
+```bash
+make ELEPHANT_DOCKER="sudo docker" bash
+```
+
+##### 1.Download/Clone a repository
+
+Download and extract a [.zip file](https://github.com/elephant-track/elephant-server/releases/download/v0.1.0/elephant-server-0.1.0.zip).
+
+Alternatively, you can clone a repository from [GitHub](https://github.com/elephant-track/elephant-server).
+
+```bash
+git clone https://github.com/elephant-track/elephant-server.git
+```
+
+##### 2. Build a Docker image
+
+First, change the directory to the project root.
+
+```bash
+cd elephant-server-0.1.0
+```
+
+The following command will build a Docker image that integrates all the required modules.
+
+```bash
+make build
+```
+
+##### 3. Generate a dataset for the ELEPHANT server
+
+Please [prepare](https://imagej.net/plugins/bdv/#exporting-from-imagej-stacks) your image data, producing a pair of [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` and `.xml` files, or [download the demo data](https://doi.org/10.5281/zenodo.4549193) and extract it as below.
+
+The ELEPHANT server deals with images using [Zarr](https://zarr.readthedocs.io/en/stable/). The following command generates required `zarr` files from the [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` file.
+
+
+```bash
+workspace
+├── datasets
+│   └── elephant-demo
+│       ├── elephant-demo.h5
+│       └── elephant-demo.xml
+```
+
+Run the script inside a Docker container.
+
+```bash
+make bash # run bash inside a docker container
+```
+
+```bash
+python /opt/elephant/script/dataset_generator.py --uint16 /workspace/datasets/elephant-demo/elephant-demo.h5 /workspace/datasets/elephant-demo
+# usage: dataset_generator.py [-h] [--uint16] [--divisor DIVISOR] input output
+
+# positional arguments:
+#   input              input .h5 file
+#   output             output directory
+
+# optional arguments:
+#   -h, --help         show this help message and exit
+#   --uint16           with this flag, the original image will be stored with
+#                      uint16
+#                      default: False (uint8)
+#   --divisor DIVISOR  divide the original pixel values by this value (with
+#                      uint8, the values should be scale-downed to 0-255)
+
+exit # exit from a docker container
+```
+
+You will find the following results.
+
+```
+workspace
+├── datasets
+│   └── elephant-demo
+│       ├── elephant-demo.h5
+│       ├── elephant-demo.xml
+│       ├── flow_hashes.zarr
+│       ├── flow_labels.zarr
+│       ├── flow_outputs.zarr
+│       ├── imgs.zarr
+│       ├── seg_labels_vis.zarr
+│       ├── seg_labels.zarr
+│       └── seg_outputs.zarr
+```
+
+| Info <br> :information_source: | By default, the docker container is launched with [volumes](https://docs.docker.com/storage/volumes/), mapping the local `workspace/` directory to the `/workspace/` directory in the container. <br> The local workspace directory can be set by the `ELEPHANT_WORKSPACE` environment variable (Default: `${PWD}/workspace`). |
+| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+```bash
+# This is optional
+export ELEPHANT_WORKSPACE="YOUR_WORKSPACE_DIR"
+make bash
+```
+
+```bash
+# This is optional
+make ELEPHANT_WORKSPACE="YOUR_WORKSPACE_DIR" bash
+```
+
+| Info <br> :information_source: | Multi-view data is not supported by ELEPHANT. You need to create a fused data (e.g. with [BigStitcher Fuse](https://imagej.net/plugins/bigstitcher/fuse)) before converting to `.zarr` . |
+| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+##### 4. Launch the ELEPHANT server via Docker
+
+The ELEPHANT server is accompanied by several services, including [Flask](https://flask.palletsprojects.com/en/1.1.x/),
+[uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/), [NGINX](https://www.nginx.com/), [redis](https://redis.io/)
+and [RabbitMQ](https://www.rabbitmq.com/).
+These services are organized by [Supervisord](http://supervisord.org/) inside the Docker container,
+exposing the port `8080` for [NGINX](https://www.nginx.com/) and `5672` for [RabbitMQ](https://www.rabbitmq.com/) available on `localhost`. 
+
+```bash
+make launch # launch the services
+```
+
+Now, the ELEPHANT server is ready.
+
+#### Setting up with Singularity
+
+##### Prerequisite
+
+`Singularity >= 3.6.0` is required. Please check the version of Singularity on your system.
+
+```bash
+singularity --version
+```
+
+Please [download the release `v0.1.0-singularity`](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.1.0-singularity.zip), or checkout the tag `v0.1.0-singularity` on Git to follow the instructions below.
+
+##### 1. Build a container
+
+Run the following command at the project root directory where you can find a `elephant.def` file.
+
+```bash
+singularity build --fakeroot elephant.sif elephant.def
+```
+
+##### 2. Prepare files to bind
+
+The following command copies `/var/lib/`, `/var/log/` and `/var/run/` in the container to `$HOME/.elephant_binds` on the host.
+
+```bash
+singularity run --fakeroot elephant.sif
+```
+
+##### 3. Start an instance for the ELEPHANT server
+
+It is recommended to launch the ELEPHANT server inside a singularity `instance` rather than using `shell` or `exec` directly, which can make some processes alive after exiting the `supervisor` process. All processes inside a `instance` can be terminated by stopping the `instance` ([see details](https://sylabs.io/guides/3.7/user-guide/running_services.html#container-instances-in-singularity)).
+
+The command below starts an `instance` named `elephant` using the image written in `elephant.sif`.\
+The `--nv` option is required to set up the container that can use NVIDIA GPU and CUDA ([see details](https://sylabs.io/guides/3.7/user-guide/gpu.html)).\
+The `--bind` option specifies the directories to bind from the host to the container ([see details](https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html)). The files copied in the previous step are bound to the original container location as `writable` files. Please set `$ELEPHANT_WORKSPACE` to the `workspace` directory on your system.
+
+```bash
+singularity instance start --nv --bind $HOME/.elephant_binds/var/lib:/var/lib,$HOME/.elephant_binds/var/log:/var/log,$HOME/.elephant_binds/var/run:/var/run,$ELEPHANT_WORKSPACE:/workspace elephant.sif elephant
+```
+
+##### 4. Generate a dataset for the ELEPHANT server
+
+The following command will generate a dataset for the ELEPHANT server.
+Please see details in <a href="#/?id=_3-generate-a-dataset-for-the-elephant-server" onclick="alwaysScroll(event)">the Docker part</a>.
+
+```bash
+singularity exec instance://elephant python /opt/elephant/script/dataset_generator.py --uint16 /workspace/datasets/elephant-demo/elephant-demo.h5 /workspace/datasets/elephant-demo
+```
+
+##### 5. Launch the ELEPHANT server
+
+The following command execute a script that launches the ELEPHANT server.
+Please specify the `SINGULARITYENV_CUDA_VISIBLE_DEVICES` if you want to use a specific GPU device on your system (default: `0`).
+
+```bash
+SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity exec instance://elephant /start.sh
+```
+
+At this point, you will be able to work with the ELEPHANT server.
+Please follow <a href="#/?id=remote-connection-to-the-elephant-server" onclick="alwaysScroll(event)">the instructions for seting up the remote connection</a>.
+
+##### 6. Stop an instance for the ELEPHANT server
+
+After exiting the `exec` by `Ctrl+C`, please do not forget to stop the `instance`.
+
+```bash
+singularity instance stop elephant
+```
 
 ## Remote connection to the ELEPHANT server
 
