@@ -113,9 +113,9 @@ A `.mastodon` project file can be loaded by running `File > Load Project` or cli
 
 ### Setting up the ELEPHANT Server
 
-Please open `Control Panel` from `Plugins > ELEPHANT > Window > Control Panel`.
+The `Control Panel` is displayed by default at startup. If you cannot find it, run `Plugins > ELEPHANT > Window > Control Panel` to show it.
 
-`Control Panel` shows the statuses of the servers (ELEPHANT server and [RabbitMQ server](https://www.rabbitmq.com/)).\
+The `Control Panel` shows the statuses of the servers (ELEPHANT server and [RabbitMQ server](https://www.rabbitmq.com/)).\
 It also provides functions for setting up the servers.
 
 <img src="_media/control-panel-default.png"></img>
@@ -138,7 +138,7 @@ Create a ngrok account from the following link.
 
 Open a Colab notebook from this button. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elephant-track/elephant-server/blob/dev/elephant_server.ipynb)
 
-On Goolge Colab, run the command [Runtime > Run all] and select `RUN ANYWAY` in the following box.
+On Goolge Colab, run the command `Runtime > Run all` and select `RUN ANYWAY` in the following box.
 
 <img src="_media/colab-warning.png"></img>
 
@@ -162,11 +162,11 @@ Root password: [your_random_password]
 
 ##### 5. Establish connections from your computer to the servers on Colab
 
-Go back to `Control Panel` and change the values of `SSH host` and `SSH port` according to the output from Colab. You can leave other fields as default.\
+Go back to the `Control Panel` and change the values of `SSH host` and `SSH port` according to the output from Colab. You can leave other fields as default.\
 Click the `Add Port Forward` button to establish the connection to the ELEPHANT server. Click `yes` for a warning dialog and enter your password shown on Colab when asked for it.\
 Subsequently, change `Local port` to `5672` and `Remote port` to `5672` and click the `Add Port Forward` button to the RabbitMQ server.
 
-If everything is ok, you will see green signals in `Control Panel`.
+If everything is ok, you will see green signals in the `Control Panel`.
 
 <img src="_media/control-panel-established.png"></img>
 
