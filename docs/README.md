@@ -70,6 +70,9 @@ Please install [Fiji](https://imagej.net/software/fiji/) on your system and upda
 7. Click on the button `Apply changes` in the dialog `ImageJ Updater`.
 8. Restart [Fiji](https://imagej.net/software/fiji/).
 
+| Info <br> :information_source: | When there is an update, ImageJ Updater will notify you. Alternatively, you can check the updates manually by running `Help > Update...`. It is recommended to keep up-to-date with the latest version of ELEPHANT to follow the new features and bug fixes. |
+| :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
 ### Prepare a Mastodon project
 
 To start working with ELEPHANT, you need to prepare a Mastodon project.
