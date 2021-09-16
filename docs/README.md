@@ -243,7 +243,7 @@ Please put all BDV windows in the same group by clicking the key icon <img src="
 
 #### 4. Tagging spots
 
-Spots can be colored based on their status by selecting the **Detection** coloring mode in `View > Coloring > Detection`.
+Spots are colored using the **Detection** coloring mode by default. You can change the coloring mode from `View > Coloring`.
 
 | Status      | Color   |
 | ----------- | ------- |
@@ -262,7 +262,7 @@ ELEPHANT provides the following shortcut keys for annotating spots.
 | :----------------------------: | :--------------------------------------------------------------------------------------------------------------------- |
 
 <video controls>
-  <source src="_media/annotation-with-shortcuts.mp4" type="video/mp4">
+  <source src="_media/annotation-with-shortcuts-simple.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video> 
 
@@ -272,7 +272,7 @@ Link annotations can be added in the following four ways on the BDV window; pres
 
 1. Keydown `A` on the highlighted spot, then keyup at the position where you want to add a linked spot in the next timepoint.
 2. Keydown `L` on the highlighted spot, then keyup on the target annotated spot in the next timepoint.
-3. Keydown `C` on the highlighted spot, then key up at the position you want to add a linked spot in the previous timepoint.
+3. Keydown `Shift`+`A` on the highlighted spot, then key up at the position you want to add a linked spot in the previous timepoint.
 4. Keydown `Shift`+`L` on the highlighted spot, then keyup on the target annotated spot in the previous timepoint.
 
 Spots and links that are added manually in this fashion are automatically tagged as `Approved` in the `Tracking` tag set.
@@ -307,19 +307,22 @@ Please check <a href="#/?id=settings-parameters" onclick="alwaysScroll(event)">t
 
 #### 2. Initialize a model
 
-First, you need to initialize a model by `Plugins > ELEPHANT > Detection > Reset Seg Model`.
+First, you need to initialize a model by `Plugins > ELEPHANT > Detection > Reset Detection Model`.
 
-This command creates a new model parameter file with the name you specified in the settings (`seg.pth` by default) in the `workspace/models/` directory, which lies in the directory you launched on the server. At the initialization step, the model parameters are pre-trained with the fluorescence image itself, without any annotations. This will take ~20 seconds.
+This command creates a new model parameter file with the name you specified in the settings (`detection.pth` by default) in the `workspace/models/` directory, which lies in the directory you launched on the server.
+There are three options for initialization:
+1. `Versatile`: initialize a model with a versatile pre-trained model
+2. `Default`: initialize a model with intensity-based self-supervised training
+3. `From URL`: initialize a model from a specified URL
 
-The first time you run the command with new data, you will be asked if you want to initialize the dataset.
+| Info <br> :information_source: | If a specified model is not initialized before prediction or training, ELEPHANT automatically initialize it with a versatile pre-trained model. |
+| :----------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------- |
 
 #### 3. Prediction
 
 After initialization of a model you can try a prediction. `Plugins > ELEPHANT > Detection > Predict Spots`
 
-We cannot expect too much at this point, but the software will generate some predictions.
-
-| Info <br> :information_source: | `Alt`+`F` is a shortcut for prediction |
+| Info <br> :information_source: | `Alt`+`S` is a shortcut for prediction |
 | :----------------------------: | :------------------------------------- |
 
 <img src="_media/initial-detection.png"></img>
@@ -355,26 +358,31 @@ Every time you update the labels (Shortcut: `U`), a new training epoch will star
   Your browser does not support the video tag.
 </video> 
 
-#### 6. Importing and extending a pretrained model
+#### 6. Saving a model
 
-Importing a pretrained model is simple. Just specify the model parameter file located at the `workspace/models` in the settings.
+The model parameter files are located under `workspace/models` on the server.
+If you are using your local machine as a server, these files should remain unless you do not delete them explicitly.
+If you are using Google Colab, you may need to save them before terminating the session.
+You can make them persistent by uncommenting the first code cell in the Colab notebook.
 
-You can download [a pretrained parameter file](https://github.com/elephant-track/elephant-server/releases/download/v0.1.0/elephant-demo_seg.pth) for the demo dataset.
+<img src="_media/google-drive-uncomment.png"></img>
+
+You can find [pretrained parameter files](https://github.com/elephant-track/elephant-server/releases/tag/data) used in the paper.
 
 ### Linking workflow
 
 #### 1. Prepare a dataset for linking
 
-Here, we will load a project from [a .masotodon project](https://github.com/elephant-track/elephant-server/releases/download/v0.1.0/elephant-demo-linking.mastodon) that contains spots generated by the pretrained detection model. Please place the file as below.
+Here, we will load a project from [a .masotodon project](https://sandbox.zenodo.org/record/918313/files/elephant-demo.mastodon?download=1) that contains spots data. Please place the file as below.
 
 ```bash
 elephant-demo
 ├── elephant-demo.h5
 ├── elephant-demo.xml
-└── elephant-demo-linking.mastodon
+└── elephant-demo.mastodon
 ```
 
-Alternatively, you can prepare it by yourself.
+Alternatively, you can complete detection by yourself.
 
 #### 2. Settings for linking
 
@@ -388,7 +396,7 @@ For other settings, please check <a href="#/?id=settings-parameters" onclick="al
 
 In the demo dataset, please go to the last timepoint (t = 9).
 
-Run the nearest neighbor linking action by `Alt`+`L` or [Plugins > ELEPHANT > Linking > Nearest Neighbor Linking].
+Run the nearest neighbor linking action by `Alt`+`L` or `Plugins > ELEPHANT > Linking > Nearest Neighbor Linking`.
 
 <video controls width>
   <source src="_media/nn-linking.mp4" type="video/mp4">
@@ -399,9 +407,11 @@ Run the nearest neighbor linking action by `Alt`+`L` or [Plugins > ELEPHANT > Li
 
 Please turn on the `use optical flow for linking` option.
 
-Download a pretrained model parameter file for flow [here]() and place it at `workspace/models/`.
+Please initialize the flow model with the `Versatile` option `Plugins > ELEPHANT > Linking > Reset Flow Model`.
 
-Run the nearest neighbor linking action by `Alt`+`L` or [Plugins > ELEPHANT > Linking > Nearest Neighbor Linking].
+<img src="_media/reset-model.png"></img>
+
+Run the nearest neighbor linking action by `Alt`+`L` or `Plugins > ELEPHANT > Linking > Nearest Neighbor Linking`.
 
 <video controls>
   <source src="_media/nn-flow-linking.mp4" type="video/mp4">
@@ -414,9 +424,9 @@ Using both the BDV window and the trackscheme, you can remove/add/modify spots a
 
 Once you finish proofreading of a track (or a tracklet), you can tag it as `Approved` in the `Tracking` tag set.
 
-Select all spots and links in the track by `Shift`+`Space`, and [Edit > Tags > Tracking > Approved] or the shortcuts `Y` > `2` > `1` in the Trackshcem view.
+Select all spots and links in the track by `Shift`+`Space`, and `Edit > Tags > Tracking > Approved` or the shortcuts `Y` > `2` > `1` in the Trackshcem view.
 
-Spots and links tagged with `Approved` are not removed in the next cycle of prediction. The `approved` links are used for training of a flow model.
+Spots and links tagged with `Approved` will remain unless users do not reomove them explicitly (the `unlabeled` links will be removed at the start of the next prediction). The `Approved` links will also be used for training of a flow model.
 
 <video controls>
   <source src="_media/linking-proofreading.mp4" type="video/mp4">
@@ -425,7 +435,7 @@ Spots and links tagged with `Approved` are not removed in the next cycle of pred
 
 #### 6. Training a flow model
 
-Once you collect certain amount of link annotations, a flow model can be trained with them by [Plugins > ELEPHANT > Linking > Train Optical Flow].
+Once you collect certain amount of link annotations, a flow model can be trained with them by `Plugins > ELEPHANT > Linking > Train Optical Flow`.
 
 Currently, there is only a batch mode for training of a flow model, which works with the annotations in the time range specified in the settings.
 
@@ -449,26 +459,26 @@ If you start training from scratch, it will take relatively long time to get the
       <td rowspan=8>Detection</td>
       <td>Predict Spots</td>
       <td>Yes</td>
-      <td><code>Alt</code>+<code>F</code></td>
+      <td><code>Alt</code>+<code>S</code></td>
       <td>Predict spots with the specified model and parameters</td>
     </tr>
     <tr>
       <td>Predict Spots Around Mouse</td>
       <td>No</td>
-      <td><code>Alt</code>+<code>Shift<code>+<code>F</code></td>
+      <td><code>Alt</code>+<code>Shift<code>+<code>S</code></td>
       <td>Predict spots around the mouse position on the BDV view</td>
     </tr>
     <tr>
-      <td>Update Seg Labels</td>
+      <td>Update Detection Labels</td>
       <td>Yes</td>
       <td><code>U</code></td>
       <td>Predict spots</td>
     </tr>
     <tr>
-      <td>Reset Seg Labels</td>
+      <td>Reset Detection Labels</td>
       <td>Yes</td>
       <td>Not available</td>
-      <td>Reset seg labels</td>
+      <td>Reset detection labels</td>
     </tr>
     <tr>
       <td>Start Live Training</td>
@@ -477,22 +487,22 @@ If you start training from scratch, it will take relatively long time to get the
       <td>Start live training</td>
     </tr>
     <tr>
-      <td>Train a Seg Model (Selected Timepoints)</td>
+      <td>Train Detection Model (Selected Timepoints)</td>
       <td>Yes</td>
       <td>Not available</td>
-      <td>Train a segmentation model with the annotated data from the specified timepoints</td>
+      <td>Train a detection model with the annotated data from the specified timepoints</td>
     </tr>
     <tr>
-      <td>Train a Seg Model (All Timepoints)</td>
+      <td>Train Detection Model (All Timepoints)</td>
       <td>Yes</td>
       <td>Not available</td>
-      <td>Train a segmentation model with the annotated data from all timepoints</td>
+      <td>Train a detection model with the annotated data from all timepoints</td>
     </tr>
     <tr>
-      <td>Reset a Seg Model</td>
+      <td>Reset Detection Model</td>
       <td>Yes</td>
       <td>Not available</td>
-      <td>Reset a segmentation model</td>
+      <td>Reset a detection model by one of the following modes: `Versatile`, `Default` or `From URL`</td>
     </tr>
     <!--Linking-->
     <tr>
@@ -521,20 +531,20 @@ If you start training from scratch, it will take relatively long time to get the
       <td>Reset flow labels</td>
     </tr>
     <tr>
-      <td>Train a Flow Model (Selected Timepoints)</td>
+      <td>Train Flow Model (Selected Timepoints)</td>
       <td>Yes</td>
       <td>Not available</td>
       <td>Train a flow model with the annotated data from the specified timepoints</td>
     </tr>
     <tr>
-      <td>Reset a Flow Model</td>
+      <td>Reset Flow Model</td>
       <td>Yes</td>
       <td>Not available</td>
-      <td>Reset a flow model</td>
+      <td>Reset a flow model by one of the following modes: `Versatile`, `Default` or `From URL`</td>
     </tr>
     <!--Utils-->
     <tr>
-      <td rowspan=12>Utils</td>
+      <td rowspan=13>Utils</td>
       <td>Map Spot Tag</td>
       <td>Yes</td>
       <td>Not available</td>
@@ -606,6 +616,12 @@ If you start training from scratch, it will take relatively long time to get the
       <td>Not available</td>
       <td>Export tracking results in a Cell Tracking Challenge format.<br>The tracks whose root spots are tagged with <code>Completed</code> are exported.</td>
     </tr>
+    <tr>
+      <td>Change Detection Tag Set Colors</td>
+      <td>Yes</td>
+      <td>Not available</td>
+      <td>Change Detection tag set colors (<code>Basic</code> or <code>Advanced</code>)</td>
+    </tr>
     <!--Analysis-->
     <tr>
       <td rowspan=5>Analysis</td>
@@ -647,25 +663,36 @@ If you start training from scratch, it will take relatively long time to get the
     <tr>
       <td>Count Divisions (Trackwise)</td>
     </tr>
+    <!--Window-->
+    <tr>
+      <td rowspan=3>Window</td>
+      <td>Client Log</td>
+      <td>Yes</td>
+      <td>Not available</td>
+      <td>Show a client log window</td>
+    </tr>
+    <tr>
+      <td>Server Log</td>
+      <td>Yes</td>
+      <td>Not available</td>
+      <td>Show a server log window</td>
+    </tr>
+    <tr>
+      <td>Control Panel</td>
+      <td>Yes</td>
+      <td>Not available</td>
+      <td>Show a control panel window</td>
+    </tr>
     <!--Abort Processing-->
     <tr>
-      <td></td>
+      <td rowspan=2></td>
       <td>Abort Processing</td>
       <td>Yes</td>
       <td><code>Ctrl</code>+<code>C</code></td>
       <td>Abort the current processing</td>
     </tr>
-    <!--Show Log Window-->
-    <tr>
-      <td></td>
-      <td>Show Log Window</td>
-      <td>Yes</td>
-      <td>Not available</td>
-      <td>Show a log window</td>
-    </tr>
     <!--Preferences-->
     <tr>
-      <td></td>
       <td>Preferences...</td>
       <td>Yes</td>
       <td>Not available</td>
@@ -680,6 +707,14 @@ The tagging function of Mastodon can provide specific information on each spot. 
 
 In the detection workflow, the **Detection** tag set is used (See <a href="#/?id=tag-sets-available-on-elephant" onclick="alwaysScroll(event)">below</a> for all provided tag sets available on ELEPHANT).
 
+<img src="_media/proofreading-with-caption.png" height="384"></img>
+
+Predicted spots and manually added spots are tagged by default as `unlabeled` and `fn`, respectively.
+
+These tags are used for training, where **true** spots and **false** spots can have different weights for training.
+
+Highlighted spots can be tagged with one of the `Detection` tags using the shortcuts shown below.
+
 | Tag       | Shortcut |
 | --------- | -------- |
 | tp        | 4        |
@@ -690,11 +725,11 @@ In the detection workflow, the **Detection** tag set is used (See <a href="#/?id
 | fb        | 9        |
 | unlabeled | 0        |
 
-<img src="_media/proofreading-with-caption.png" height="384"></img>
+<video controls>
+  <source src="_media/annotation-with-shortcuts.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
 
-Predicted spots and manually added spots are tagged by default as `unlabeled` and `fn`, respectively.
-
-These tags are used for training, where **true** spots and **false** spots can have different weights for training.
 
 ## Tag sets available on ELEPHANT
 
@@ -837,7 +872,7 @@ By default, ELEPHANT generates and uses the following tag sets.
     </tr>
   </thead>
   <tbody>
-    <!--Basi Settings-->
+    <!--Basic Settings-->
     <tr>
       <td rowspan=21>Basic Settings</td>
       <td>prediction with patches</td>
@@ -908,16 +943,16 @@ By default, ELEPHANT generates and uses the following tag sets.
       <td>The path of the dataset dir stored on the server.<br>The path is relative to <code>/workspace/models/</code> on the server.</td>
     </tr>
     <tr>
-      <td>seg model file</td>
-      <td>The path of the [state_dict](https://pytorch.org/tutorials/beginner/saving_loading_models.html#what-is-a-state-dict) file for the segmentation (voxel classification) model stored on the server.<br>The path is relative to <code>/workspace/models/</code> on the server.</td>
+      <td>detection model file</td>
+      <td>The path of the [state_dict](https://pytorch.org/tutorials/beginner/saving_loading_models.html#what-is-a-state-dict) file for the detection model stored on the server.<br>The path is relative to <code>/workspace/models/</code> on the server.</td>
     </tr>
     <tr>
       <td>flow model file</td>
       <td>The path of the [state_dict](https://pytorch.org/tutorials/beginner/saving_loading_models.html#what-is-a-state-dict) file for the flow model stored on the server.<br>The path is relative to <code>/workspace/models/</code> on the server.</td>
     </tr>
     <tr>
-      <td>seg Tensorboard log dir</td>
-      <td>The path of the Tensorboard log dir for the seg model stored on the server.<br>The path is relative to <code>/workspace/logs/</code> on the server.</td>
+      <td>detection Tensorboard log dir</td>
+      <td>The path of the Tensorboard log dir for the detection model stored on the server.<br>The path is relative to <code>/workspace/logs/</code> on the server.</td>
     </tr>
     <tr>
       <td>flow Tensorboard log dir</td>
@@ -927,7 +962,7 @@ By default, ELEPHANT generates and uses the following tag sets.
     <tr>
       <td rowspan=21>Advanced Settings</td>
       <td>output prediction</td>
-      <td>If checked, prediction output is save as `.zarr` on the server for the further inspection.</td>
+      <td>If checked, prediction output is save as <code>.zarr</code> on the server for the further inspection.</td>
     </tr>
     <tr>
       <td>apply slice-wise median correction</td>
@@ -950,16 +985,16 @@ By default, ELEPHANT generates and uses the following tag sets.
       <td>Training crop size for z axis. The smaller of this parameter and the z dimension of the image is used for the actual crop size z.</td>
     </tr>
     <tr>
-      <td>seg class weight bg</td>
-      <td>Class weight for <i>background</i> in the loss function for the segmentation model.</td>
+      <td>class weight bg</td>
+      <td>Class weight for <i>background</i> in the loss function for the detection model.</td>
     </tr>
     <tr>
-      <td>seg class weight border</td>
-      <td>Class weight for <i>border</i> in the loss function for the segmentation model.</td>
+      <td>class weight border</td>
+      <td>Class weight for <i>border</i> in the loss function for the detection model.</td>
     </tr>
     <tr>
-      <td>seg class weight center</td>
-      <td>Class weight for <i>center</i> in the loss function for the segmentation model.</td>
+      <td>class weight center</td>
+      <td>Class weight for <i>center</i> in the loss function for the detection model.</td>
     </tr>
     <tr>
       <td>flow dim weight x</td>
@@ -975,7 +1010,7 @@ By default, ELEPHANT generates and uses the following tag sets.
     </tr>
     <tr>
       <td>false weight</td>
-      <td>Labels generated from false annotations (`FN`, `FP`, `FB`) are weighted with this value in loss calculation during training (relative to true annotations).</td>
+      <td>Labels generated from false annotations (<code>FN</code>, <code>FP</code>, <code>FB</code>) are weighted with this value in loss calculation during training (relative to true annotations).</td>
     </tr>
     <tr>
       <td>center ratio</td>
@@ -1003,17 +1038,21 @@ By default, ELEPHANT generates and uses the following tag sets.
     </tr>
     <tr>
       <td>use interpolation for linking</td>
-      <td>If checked, the missing spots in the link are interpolated, which happens when 1 < `NN search neighbors`.</td>
+      <td>If checked, the missing spots in the link are interpolated, which happens when 1 < <code>NN search neighbors</code>.</td>
     </tr>
     <tr>
-      <td>client log file</td>
-      <td>The path of the log file for the client application.<br>The path is relative to <code>~/.mastodon/logs/</code> on the client.</td>
+      <td>log file basename</td>
+      <td>This value specifies log file basename.<br><code>~/.mastodon/logs/client_BASENAME.log</code>, <code>~/.mastodon/logs/server_BASENAME.log</code> will be created and used as log files.</td>
     </tr>
     <!--Server Settings-->
     <tr>
-      <td rowspan=4>Server Settings</td>
+      <td rowspan=5>Server Settings</td>
       <td>ELEPHANT server URL with port number</td>
       <td>URL for the ELEPHANT server. It should include the port number (e.g. <code>http://localhost:8080</code>)</td>
+    </tr>
+    <tr>
+      <td>RabbitMQ server port</td>
+      <td>Port number of the RabbitMQ server.</td>
     </tr>
     <tr>
       <td>RabbitMQ server host name</td>
