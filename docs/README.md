@@ -121,6 +121,9 @@ The `Control Panel` is displayed by default at startup. If you cannot find it, r
 The `Control Panel` shows the statuses of the servers (ELEPHANT server and [RabbitMQ server](https://www.rabbitmq.com/)).\
 It also provides functions for setting up the servers.
 
+| Info <br> :information_source: | The ELEPHANT server provides main functionalities (e.g. detection, linking), while the RabbitMQ server is used to send messages to the client (e.g. progress, completion). |
+| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
 <img src="_media/control-panel-default.png"></img>
 
 Here, we will set up the servers using [Google Colab](https://research.google.com/colaboratory/faq.html), a freely available product from Google Research. You don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
@@ -368,6 +371,14 @@ You can make them persistent by uncommenting the first code cell in the Colab no
 <img src="_media/google-drive-uncomment.png"></img>
 
 You can find [pretrained parameter files](https://github.com/elephant-track/elephant-server/releases/tag/data) used in the paper.
+
+#### 7. Importing a model
+
+The model parameter file can be specified in the `Preferences` dialog, where the file path is relative to `/workspace/models/` on the server.\
+There are two ways to import the pre-trained model parameters:
+1. Upload the pre-trained parameters file to the website that provides a public download URL (e.g. GitHub, Google Drive, Dropbox). Run `Plugins > ELEPHANT > Detection > Reset Detection Model` and select the `From URL` option with the download URL.
+2. Directly place/replace the file at the specified file path on the server.
+
 
 ### Linking workflow
 
