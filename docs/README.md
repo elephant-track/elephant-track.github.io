@@ -79,7 +79,7 @@ To start working with ELEPHANT, you need to prepare a Mastodon project.
 
 #### 1. Prepare image data in the BDV format
 
-[Download the demo data](https://sandbox.zenodo.org/record/897403) and extract the files as below.
+[Download the demo data](https://doi.org/10.5281/zenodo.5519708) and extract the files as below.
 
 ```bash
 elephant-demo
@@ -384,7 +384,7 @@ There are two ways to import the pre-trained model parameters:
 
 #### 1. Prepare a dataset for linking
 
-Here, we will load a project from [a .masotodon project](https://sandbox.zenodo.org/record/918313/files/elephant-demo.mastodon?download=1) that contains spots data. Please place the file as below.
+Here, we will load a project from [a .masotodon project](https://zenodo.org/record/5519708/files/elephant-demo.mastodon?download=1) that contains spots data. Please place the file as below.
 
 ```bash
 elephant-demo
@@ -1189,7 +1189,7 @@ make build
 
 ##### 3. Generate a dataset for the ELEPHANT server
 
-Please [prepare](https://imagej.net/plugins/bdv/#exporting-from-imagej-stacks) your image data, producing a pair of [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` and `.xml` files, or [download the demo data](https://doi.org/10.5281/zenodo.4549193) and extract it as below.
+Please [prepare](https://imagej.net/plugins/bdv/#exporting-from-imagej-stacks) your image data, producing a pair of [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` and `.xml` files, or [download the demo data](https://doi.org/10.5281/zenodo.5519708) and extract it as below.
 
 The ELEPHANT server deals with images using [Zarr](https://zarr.readthedocs.io/en/stable/). The following command generates required `zarr` files from the [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` file.
 
@@ -1364,7 +1364,7 @@ ssh.exe -N -L 5672:localhost:5672 USERNAME@HOSTNAME # RabbitMQ
 After establishing these connections, the ELEPHANT client can communicate with the ELEPHANT server just as launched on localhost.
 
 ## Demo Data
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4549193.svg)](https://doi.org/10.5281/zenodo.4549193)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5519708.svg)](https://doi.org/10.5281/zenodo.5519708)
 
 ## Acknowledgements
 
