@@ -142,7 +142,7 @@ Create a ngrok account from the following link.
 
 ##### 3. Open and run a Colab notebook
 
-Open a Colab notebook from this button. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elephant-track/elephant-server/blob/dev/elephant_server.ipynb)
+Open a Colab notebook from this button. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elephant-track/elephant-server/blob/main/elephant_server.ipynb)
 
 On Goolge Colab, run the command `Runtime > Run all` and select `RUN ANYWAY` in the following box.
 
