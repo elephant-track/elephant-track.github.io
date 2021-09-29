@@ -54,21 +54,14 @@ Please install [Fiji](https://imagej.net/software/fiji/) on your system and upda
 1. Start [Fiji](https://imagej.net/software/fiji/).
 2. Run `Help > Update...` from the menu bar.
 3. Click on the button `Manage update sites`.
-4. Tick the checkbox for the update site Mastodon.
-
-  <img src="_media/manage-update-sites-mastodon.png"></img>
-
-5. Click on the button `Add update site` and add the following entry with the checkbox ticked.
-
-  | Name     | URL                                |
-  | -------- | ---------------------------------- |
-  | ELEPHANT | https://sites.imagej.net/ELEPHANT/ |
+4. Tick the checkboxes for `ELEPHANT` and `Mastodon` update sites.
 
   <img src="_media/manage-update-sites-elephant.png"></img>
+  <img src="_media/manage-update-sites-mastodon.png"></img>
 
-6. Click on the button `Close` in the dialog `Manage update sites`.
-7. Click on the button `Apply changes` in the dialog `ImageJ Updater`.
-8. Restart [Fiji](https://imagej.net/software/fiji/).
+5. Click on the button `Close` in the dialog `Manage update sites`.
+6. Click on the button `Apply changes` in the dialog `ImageJ Updater`.
+7. Restart [Fiji](https://imagej.net/software/fiji/).
 
 | Info <br> :information_source: | When there is an update, ImageJ Updater will notify you. Alternatively, you can check the updates manually by running `Help > Update...`. It is recommended to keep up-to-date with the latest version of ELEPHANT to follow the new features and bug fixes. |
 | :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
