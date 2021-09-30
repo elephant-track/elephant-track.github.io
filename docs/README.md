@@ -86,6 +86,7 @@ Alternatively, you can follow [the instructions here](https://imagej.net/plugins
 | :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ```bash
+# Convert image data stored in Cell Tracking Challenge style to the BDV format
 Fiji.app/ImageJ-linux64 --ij2 --headless --console --run Fiji.app/scripts/ctc2bdv.groovy "input='CTC_TIF_DIR', output='YOUR_DATA.xml', sizeX=0.32, sizeY=0.32, sizeZ=2.0, unit='µm'"
 ```
 
