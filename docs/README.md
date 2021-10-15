@@ -283,6 +283,9 @@ To visualize the `Tracking` tag, set the coloring mode to `Tracking` by `View > 
 
 ### Detection workflow
 
+| Info <br> :information_source: | In the following workflow, please put all relevant BDV windows in the `group 1` by clicking the key icon <img src="_media/group-icon.png"></img> on top left in the window. |
+| :----------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
 #### 1. Settings
 
 Open a Preferences dialog `Plugins > ELEPHANT > Preferences...`.
@@ -371,11 +374,15 @@ You can find [pretrained parameter files](https://github.com/elephant-track/elep
 The model parameter file can be specified in the `Preferences` dialog, where the file path is relative to `/workspace/models/` on the server.\
 There are two ways to import the pre-trained model parameters:
 1. Upload the pre-trained parameters file to the website that provides a public download URL (e.g. GitHub, Google Drive, Dropbox). Run `Plugins > ELEPHANT > Detection > Reset Detection Model` and select the `From URL` option with the download URL.
+
+  <img src="_media/reset-model-url.png"></img>
 2. Directly place/replace the file at the specified file path on the server.
 
 
 ### Linking workflow
 
+| Info <br> :information_source: | In the following workflow, please put all relevant BDV windows in the `group 1` by clicking the key icon <img src="_media/group-icon.png"></img> on top left in the window. |
+| :----------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 #### 1. Prepare a dataset for linking
 
 Here, we will load a project from [a .masotodon project](https://zenodo.org/record/5519708/files/elephant-demo.mastodon?download=1) that contains spots data. Please place the file as below.
@@ -905,7 +912,7 @@ By default, ELEPHANT generates and uses the following tag sets.
     </tr>
     <tr>
       <td>time range</td>
-      <td>Time range for batch training. Starting from the current time point, the timepoints in the range (backward) specified is used for training.</td>
+      <td>Time range (backward) for prediction and batch training. For example, if the current time point is `10` and the specified time range is `5`, time points `[6, 7, 8, 9, 10]` are used for prediction and batch training.</td>
     </tr>
     <tr>
       <td>auto BG threshold</td>
