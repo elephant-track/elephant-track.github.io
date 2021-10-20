@@ -1369,6 +1369,8 @@ After establishing these connections, the ELEPHANT client can communicate with t
 
 ## Acknowledgements
 
+This research was supported by the European Research Council, under the European Union Horizon 2020 programme, grant ERC-2015-AdG #694918. The software is developed in Institut de Génomique Fonctionnelle de Lyon (IGFL) / Centre national de la recherche scientifique (CNRS).
+
 - ELEPHANT client
   - [Mastodon](https://github.com/mastodon-sc/mastodon)
   - [BigDataViewer](https://github.com/bigdataviewer/bigdataviewer-core)
