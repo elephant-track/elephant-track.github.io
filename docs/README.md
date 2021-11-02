@@ -1166,7 +1166,7 @@ make ELEPHANT_DOCKER="sudo docker" bash
 
 ##### 1.Download/Clone a repository
 
-Download and extract a [.zip file](https://github.com/elephant-track/elephant-server/releases/download/v0.1.0/elephant-server-0.1.0.zip).
+Download and extract a [.zip file](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.2.0.zip).
 
 Alternatively, you can clone a repository from [GitHub](https://github.com/elephant-track/elephant-server).
 
@@ -1179,7 +1179,7 @@ git clone https://github.com/elephant-track/elephant-server.git
 First, change the directory to the project root.
 
 ```bash
-cd elephant-server-0.1.0
+cd elephant-server-0.2.0
 ```
 
 The following command will build a Docker image that integrates all the required modules.
