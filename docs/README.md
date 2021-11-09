@@ -134,6 +134,9 @@ Create a ngrok account from the following link.
 
 [ngrok - secure introspectable tunnels to localhost](https://dashboard.ngrok.com/signup)
 
+| Info <br> :information_source: | Ngrok is a service that tunnels between a remote computer and a local computer using a public URL on the Internet. It is helpful when we do not have full access to the remote computing environment as is the case with Google Colab. Some institutes have disallowed the use of Ngrok due to security concerns. If the service is not available on your network, unfortunately, Google Colab cannot be used for setting up the ELEPHANT server. |
+| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+
 ##### 3. Open and run a Colab notebook
 
 Open a Colab notebook from this button. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elephant-track/elephant-server/blob/main/elephant_server.ipynb)
