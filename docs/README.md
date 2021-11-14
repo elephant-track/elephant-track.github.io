@@ -145,6 +145,9 @@ On Goolge Colab, run the command `Runtime > Run all` and select `RUN ANYWAY` in 
 
 <img src="_media/colab-warning.png"></img>
 
+| Info <br> :information_source: | If you get an error when you rerun the notebook, it is possible that your connection has been lost. In that case, please rerun all the cells again from `Runtime > Run all`. |
+| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
 ##### 4. Start a ngrok tunnel
 
 After around 10 minutes, you will find the following box on the bottom of the page.
