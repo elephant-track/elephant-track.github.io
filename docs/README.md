@@ -185,8 +185,8 @@ When you finish using the ELEPHANT, stop and terminate your Colab runtime so tha
 
 <img src="_media/terminate-colab.png"></img>
 
-| Info <br> :information_source: | If you see the following message, it is likely that you exceeded the usage limits. Unfortunately, you cannot use Colab with GPU at the moment. See details <a href="https://research.google.com/colaboratory/faq.html#usage-limits">here</a> |
-| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Info <br> :information_source: | If you see the following message, it is likely that you exceeded the usage limits. Unfortunately, you cannot use Colab with GPU at the moment. In that case, you can still use ELEPHANT with CPU only. Please note that with CPU only, training and prediction take longer than on the GPU-accelerated environment. See details <a href="https://research.google.com/colaboratory/faq.html#usage-limits">here</a> |
+| :----------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <img src="_media/colab-limits-warning.png"></img>
 
