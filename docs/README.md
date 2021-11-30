@@ -420,6 +420,8 @@ Run the nearest neighbor linking action by `Alt`+`L` or `Plugins > ELEPHANT > Li
 
 To open the TrackScheme window, click the button "trackscheme" in the Mastodon main window.
 
+In the following steps, please set the coloring mode to `Tracking` by `View > Coloring > Tracking` in the TrackScheme window and the BigDataViewer window.
+
 <video controls width>
   <source src="_media/nn-linking.mp4" type="video/mp4">
   Your browser does not support the video tag.
@@ -449,6 +451,9 @@ Once you finish proofreading of a track (or a tracklet), you can tag it as `Appr
 Select all spots and links in the track by `Shift`+`Space`, and `Edit > Tags > Tracking > Approved` or the shortcuts `Y` > `2` > `1` in the Trackshcem view.
 
 Spots and links tagged with `Approved` will remain unless users do not reomove them explicitly (the `unlabeled` links will be removed at the start of the next prediction). The `Approved` links will also be used for training of a flow model.
+
+| Info <br> :information_source: | If you cannot see the colors as in the video, please make sure that you set the coloring mode to `Tracking` by `View > Coloring > Tracking` in the TrackScheme window and the BigDataViewer window. |
+| :----------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <video controls>
   <source src="_media/linking-proofreading.mp4" type="video/mp4">
