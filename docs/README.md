@@ -271,9 +271,9 @@ ELEPHANT provides the following shortcut keys for annotating spots.
   Your browser does not support the video tag.
 </video> 
 
-#### 5. Link Annotations
+#### 5. Adding links
 
-Link annotations can be added in the following four ways on the BDV window; pressing down one of the following keys (keydown) will move you automatically to the next or the previous timepoint (depending on the command, see below):
+Links can be added in the following four ways on the BDV window; pressing down one of the following keys (keydown) will move you automatically to the next or the previous timepoint (depending on the command, see below):
 
 1. Keydown `A` on the highlighted spot, then keyup at the position where you want to add a linked spot in the next timepoint.
 2. Keydown `L` on the highlighted spot, then keyup on the target annotated spot in the next timepoint.
