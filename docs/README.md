@@ -233,6 +233,8 @@ The following table summaraizes the frequently-used actions used in the BDV wind
 | Select axis                                                 | `Alt`+`X` (X axis) <br> `Alt`+`Y` (Y axis) &nbsp;&nbsp;&nbsp; *ELEPHANT only* <br> `Alt`+`Z` (Z axis)                                                                              |
 | Rotate the highlighted spot                                 | `Alt`+`←` (Counterclockwise) / `Alt`+`→` (Clockwise)&nbsp;&nbsp;&nbsp; *ELEPHANT only*                                                                                             |
 
+In the following steps, we use multiple BDV windows to visualize a 3D volume from different axes. Please open three BDV windows by clicking the `bdv` button in the main window (Shortcut: `V`), then rotate them to show one of XY, XZ or YZ plane using the shortcuts (`Shift`+`Z`, `Shift`+`Y` or `Shift`+`X`) on each window. Finally, synchronize them by clicking the key icon <img src="_media/group-icon.png"></img> on top left in each BDV window.
+
 #### 3. Annotating spots
 
 Ellipsoids can be added and manipulated to annotate spots (e.g. nuclei) using shortcuts, as shown below.
