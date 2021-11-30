@@ -418,6 +418,8 @@ In the demo dataset, please go to the last timepoint (t = 9).
 
 Run the nearest neighbor linking action by `Alt`+`L` or `Plugins > ELEPHANT > Linking > Nearest Neighbor Linking`.
 
+To open the TrackScheme window, click the button "trackscheme" in the Mastodon main window.
+
 <video controls width>
   <source src="_media/nn-linking.mp4" type="video/mp4">
   Your browser does not support the video tag.
