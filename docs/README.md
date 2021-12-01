@@ -393,13 +393,13 @@ There are two ways to import the pre-trained model parameters:
 | :----------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 #### 1. Prepare a dataset for linking
 
-Here, we will load a project from [a .masotodon project](https://zenodo.org/record/5519708/files/elephant-demo.mastodon?download=1) that contains spots data. Please place the file as below.
+Here, we will load a project from [a .masotodon project](https://zenodo.org/record/5519708/files/elephant-demo.mastodon?download=1) that contains spots data. Please place the file in the same folder as the BDV files (`.h5` and `.xml`) are in.
 
 ```bash
 elephant-demo
 ├── elephant-demo.h5
 ├── elephant-demo.xml
-└── elephant-demo.mastodon
+└── elephant-demo-with-spots.mastodon
 ```
 
 Alternatively, you can complete detection by yourself.
