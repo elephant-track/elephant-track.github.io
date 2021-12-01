@@ -369,6 +369,7 @@ During live mode, you can find the text "live mode" on top of the BDV view.
 <img src="_media/live-mode-text.png"></img>
 
 Every time you update the labels (Shortcut: `U`), a new training epoch will start, with the latest labels in the current timepoint.
+To perform prediction with the latest model, the user needs to run `Predict Spots` (Shortcut: `Alt`+`S`) after the model is updated.
 
 <video controls>
   <source src="_media/live-training.mp4" type="video/mp4">
