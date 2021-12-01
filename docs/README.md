@@ -237,7 +237,15 @@ In the following steps, we use multiple BDV windows to visualize a 3D volume fro
 
 #### 3. Annotating spots
 
-Ellipsoids can be added and manipulated to annotate spots (e.g. nuclei) using shortcuts, as shown below.
+Ellipsoids can be added and manipulated to annotate spots (e.g. nuclei) using shortcuts.
+Typically, the user will perform the following commands.
+
+1. Add a spot (`A`)
+2. Increase (`E`) / Decrease (`Q`) the radius of the spot
+3. Select an axis to adjust the radius (`Alt`+`X` / `Alt`+`Y` / `Alt`+`Z`)
+4. Increase (`Alt`+`E`) / Decrease (`Alt`+`Q`) the radius of the spot along the selected axis (a sphere becomes an ellipsoid)
+5. Select an axis to rotate (`Alt`+`X` / `Alt`+`Y` / `Alt`+`Z`)
+6. Rotate the spot along the selected axis counterclockwise (`Alt`+`←`) or clockwise (`Alt`+`→`)
 
 Please put all BDV windows in the same group by clicking the key icon <img src="_media/group-icon.png"></img> on top left in the window to synchronize them.
 
