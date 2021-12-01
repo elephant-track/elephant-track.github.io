@@ -448,7 +448,7 @@ Using both the BDV window and the trackscheme, you can remove/add/modify spots a
 
 Once you finish proofreading of a track (or a tracklet), you can tag it as `Approved` in the `Tracking` tag set.
 
-Select all spots and links in the track by `Shift`+`Space`, and `Edit > Tags > Tracking > Approved` or the shortcuts `Y` > `2` > `1` in the Trackshcem view.
+Select all spots and links in the track by `Shift`+`Space`, and `Edit > Tags > Tracking > Approved`. There is a set of shortcuts to perform tagging efficiently. The shortcut `Y` pops up a small window on top left in the TrackScheme window, where you can select the tag set, followed by the tag by pressing a number in the list. For example, `Edit > Tags > Tracking > Approved` corresponds to the set of shortcuts [`Y` > `2` > `1`].
 
 Spots and links tagged with `Approved` will remain unless users do not reomove them explicitly (the `unlabeled` links will be removed at the start of the next prediction). The `Approved` links will also be used for training of a flow model.
 
