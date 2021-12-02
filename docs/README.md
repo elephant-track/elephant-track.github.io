@@ -384,10 +384,11 @@ To perform prediction with the latest model, the user needs to run `Predict Spot
 
 #### 6. Saving a model
 
-The model parameter files are located under `workspace/models` on the server.
-If you are using your local machine as a server, these files should remain unless you do not delete them explicitly.
-If you are using Google Colab, you may need to save them before terminating the session.
-You can make them persistent by uncommenting the first code cell in the Colab notebook.
+The model parameter files are located under `workspace/models` on the server.\
+If you are using your local machine as a server, these files should remain unless you do not delete them explicitly.\
+If you are using Google Colab, you may need to save them before terminating the session.\
+You can download the model parater file by running `Plugins > ELEPHANT > Detection > Download Detection Model`.\
+Alternatively, you can make it persistent on your Google drive by uncommenting the first code cell in the Colab notebook.
 
 <img src="_media/google-drive-uncomment.png"></img>
 
