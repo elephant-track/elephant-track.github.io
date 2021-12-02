@@ -97,12 +97,13 @@
               }
           }
 
-      window.addEventListener('scroll', onScroll)
-      onScroll()
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+      window.focus();
       window.scrollTo({
           top: offset,
           behavior: 'smooth'
-      })
+      });
   }
 
   function handleMenuClick(e) {
