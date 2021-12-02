@@ -335,7 +335,8 @@ This command creates a new model parameter file with the name you specified in t
 There are three options for initialization:
 1. `Versatile`: initialize a model with a versatile pre-trained model
 2. `Default`: initialize a model with intensity-based self-supervised training
-3. `From URL`: initialize a model from a specified URL
+3. `From File`: initialize a model from a local file
+4. `From URL`: initialize a model from a specified URL
 
 | Info <br> :information_source: | If a specified model is not initialized before prediction or training, ELEPHANT automatically initialize it with a versatile pre-trained model. |
 | :----------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -395,11 +396,14 @@ You can find [pretrained parameter files](https://github.com/elephant-track/elep
 #### 7. Importing a model
 
 The model parameter file can be specified in the `Preferences` dialog, where the file path is relative to `/workspace/models/` on the server.\
-There are two ways to import the pre-trained model parameters:
-1. Upload the pre-trained parameters file to the website that provides a public download URL (e.g. GitHub, Google Drive, Dropbox). Run `Plugins > ELEPHANT > Detection > Reset Detection Model` and select the `From URL` option with the download URL.
+There are three ways to import the pre-trained model parameters:
+1. Run `Plugins > ELEPHANT > Detection > Reset Detection Model` and select the `From File` option with the local file.
+
+  <img src="_media/reset-model-file.png"></img>
+2. Upload the pre-trained parameters file to the website that provides a public download URL (e.g. GitHub, Google Drive, Dropbox). Run `Plugins > ELEPHANT > Detection > Reset Detection Model` and select the `From URL` option with the download URL.
 
   <img src="_media/reset-model-url.png"></img>
-2. Directly place/replace the file at the specified file path on the server.
+3. Directly place/replace the file at the specified file path on the server.
 
 
 ### Linking workflow
@@ -544,7 +548,7 @@ If you start training from scratch, it will take relatively long time to get the
       <td>Reset Detection Model</td>
       <td>Yes</td>
       <td>Not available</td>
-      <td>Reset a detection model by one of the following modes: `Versatile`, `Default` or `From URL`</td>
+      <td>Reset a detection model by one of the following modes: `Versatile`, `Default`, `From File` or `From URL`</td>
     </tr>
     <!--Linking-->
     <tr>
@@ -582,7 +586,7 @@ If you start training from scratch, it will take relatively long time to get the
       <td>Reset Flow Model</td>
       <td>Yes</td>
       <td>Not available</td>
-      <td>Reset a flow model by one of the following modes: `Versatile`, `Default` or `From URL`</td>
+      <td>Reset a flow model by one of the following modes: `Versatile`, `Default`, `From File` or `From URL`</td>
     </tr>
     <!--Utils-->
     <tr>
