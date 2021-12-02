@@ -965,7 +965,7 @@ By default, ELEPHANT generates and uses the following tag sets.
     </tr>
     <tr>
       <td>NN linking threshold</td>
-      <td>In the linking workflow, the length of the link should be smaller than this value.<br>If the optical flow is used in linking, the length is calculated as the distance based on the flow-corrected position of the spot.</td>
+      <td>In the linking workflow, the length of the link should be smaller than this value.<br>If the optical flow is used in linking, the length is calculated as the distance based on the flow-corrected position of the spot. This value is referred to as <code>d_serch</code> in the paper.</td>
     </tr>
     <tr>
       <td>NN max edges</td>
