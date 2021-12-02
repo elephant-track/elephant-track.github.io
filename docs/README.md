@@ -258,7 +258,8 @@ Please put all BDV windows in the same group by clicking the key icon <img src="
 
 #### 4. Tagging spots
 
-Spots are colored using the **Detection** coloring mode by default. You can change the coloring mode from `View > Coloring`.
+Spots are colored using the **Detection** coloring mode by default.\
+You can change the coloring mode from `View > Coloring`.
 
 | Status      | Color   |
 | ----------- | ------- |
@@ -747,6 +748,9 @@ If you start training from scratch, it will take relatively long time to get the
 The tagging function of Mastodon can provide specific information on each spot. ELEPHANT uses the **Tag** information for processing.
 
 In the detection workflow, the **Detection** tag set is used (See <a href="#/?id=tag-sets-available-on-elephant" onclick="alwaysScroll(event)">below</a> for all provided tag sets available on ELEPHANT).
+
+There are two color modes in the **Detection** tag set, `Basic` and `Advanced`.
+You can switch between them from `Plugins > ELEPHANT > Utils > Change Detection Tag Set Colors`.
 
 <img src="_media/proofreading-with-caption.png" height="384"></img>
 
