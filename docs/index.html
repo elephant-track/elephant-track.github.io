@@ -27,11 +27,14 @@
     window.$docsify = {
       alias: {
         '/v0.1/.*_sidebar.md': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.1/docs/_sidebar.md',
+        '/v0.2/.*_sidebar.md': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.2/docs/_sidebar.md',
         '/.*/_sidebar.md': '/_sidebar.md',
         '/v0.1/': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.1/docs/README.md',
+        '/v0.2/': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.2/docs/README.md',
         '/v0.1/(.*)': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.1/docs/$1',
-        '/v0.2/': 'README.md',
-        '/v0.2/(.*)': '/$1',
+        '/v0.2/(.*)': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.2/docs/$1',
+        '/v0.3/': 'README.md',
+        '/v0.3/(.*)': '/$1',
       },
       name: '<a id="logo-link" class="app-name-link" data-nosearch href="/" onclick="alwaysScrollToTop();"><div class="sidebar-logo">' +
         '<img src="_media/elephant-logo-text.svg" height="64px">' +
@@ -41,6 +44,7 @@
         '<option value="">latest</option>' +
         '<option value="v0.1">v0.1</option>' +
         '<option value="v0.2">v0.2</option>' +
+        '<option value="v0.3">v0.3</option>' +
         '</select>' +
         '</div>',
       repo: 'https://github.com/elephant-track',
@@ -55,13 +59,13 @@
         namespace: 'docs-elephant',
         hideOtherSidebarContent: true,
         depth: 3,
-        pathNamespaces: ['', '/v0.1', '/v0.2']
+        pathNamespaces: ['', '/v0.1', '/v0.2', '/v0.3']
       },
       namespaces: [
         {
           id: "version",
-          values: ["latest", "v0.1", "v0.2"],
-          default: "v0.2",
+          values: ["latest", "v0.1", "v0.2", "v0.3"],
+          default: "v0.3",
           optional: true,
           selector: "#version-selector"
         }
