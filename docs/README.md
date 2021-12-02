@@ -51,6 +51,8 @@ Please install [Fiji](https://imagej.net/software/fiji/) on your system and upda
 
 ### Installation
 
+<iframe width="560" height="640" src="https://www.youtube-nocookie.com/embed/l5Qa53m5A7Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 1. Start [Fiji](https://imagej.net/software/fiji/).
 2. Run `Help > Update...` from the menu bar.
 3. Click on the button `Manage update sites`.
@@ -299,6 +301,8 @@ To visualize the `Tracking` tag, set the coloring mode to `Tracking` by `View > 
 </video> 
 
 ### Detection workflow
+
+<iframe width="560" height="640" src="https://www.youtube-nocookie.com/embed/VScQb3vJylY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 | Info <br> :information_source: | In the following workflow, please put all relevant BDV windows in the `group 1` by clicking the key icon <img src="_media/group-icon.png"></img> on top left in the window. |
 | :----------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
