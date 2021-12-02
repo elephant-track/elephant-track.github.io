@@ -387,7 +387,7 @@ To perform prediction with the latest model, the user needs to run `Predict Spot
 The model parameter files are located under `workspace/models` on the server.\
 If you are using your local machine as a server, these files should remain unless you do not delete them explicitly.\
 If you are using Google Colab, you may need to save them before terminating the session.\
-You can download the model parater file by running `Plugins > ELEPHANT > Detection > Download Detection Model`.\
+You can download the model parameter file by running `Plugins > ELEPHANT > Detection > Download Detection Model` or `Plugins > ELEPHANT > Linking > Download Flow Model`.\
 Alternatively, you can make it persistent on your Google drive by uncommenting the first code cell in the Colab notebook.
 
 <img src="_media/google-drive-uncomment.png"></img>
@@ -503,7 +503,7 @@ If you start training from scratch, it will take relatively long time to get the
   <tbody>
     <!--Detection-->
     <tr>
-      <td rowspan=8>Detection</td>
+      <td rowspan=9>Detection</td>
       <td>Predict Spots</td>
       <td>Yes</td>
       <td><code>Alt</code>+<code>S</code></td>
@@ -551,6 +551,12 @@ If you start training from scratch, it will take relatively long time to get the
       <td>Not available</td>
       <td>Reset a detection model by one of the following modes: `Versatile`, `Default`, `From File` or `From URL`</td>
     </tr>
+    <tr>
+      <td>Download Detection Model</td>
+      <td>Yes</td>
+      <td>Not available</td>
+      <td>Download a detection model parameter file.</td>
+    </tr>
     <!--Linking-->
     <tr>
       <td rowspan=6>Linking</td>
@@ -588,6 +594,12 @@ If you start training from scratch, it will take relatively long time to get the
       <td>Yes</td>
       <td>Not available</td>
       <td>Reset a flow model by one of the following modes: `Versatile`, `Default`, `From File` or `From URL`</td>
+    </tr>
+    <tr>
+      <td>Download Flow Model</td>
+      <td>Yes</td>
+      <td>Not available</td>
+      <td>Download a flow model parameter file.</td>
     </tr>
     <!--Utils-->
     <tr>
