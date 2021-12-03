@@ -1238,7 +1238,10 @@ The following command will build a Docker image that integrates all the required
 make build
 ```
 
-##### 3. Generate a dataset for the ELEPHANT server
+##### 3. Generate a dataset for the ELEPHANT server (Optional)
+
+| Info <br> :information_source: | In the latest version, this step can be done automatically and you do not need to do it manually if there is no particular reason. |
+| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------- |
 
 Please [prepare](https://imagej.net/plugins/bdv/#exporting-from-imagej-stacks) your image data, producing a pair of [BigDataViewer](https://imagej.net/plugins/bdv/) `.h5` and `.xml` files, or [download the demo data](https://doi.org/10.5281/zenodo.5519708) and extract it as below.
 
@@ -1368,10 +1371,13 @@ The `--bind` option specifies the directories to bind from the host to the conta
 singularity instance start --nv --bind $HOME/.elephant_binds/var/lib:/var/lib,$HOME/.elephant_binds/var/log:/var/log,$HOME/.elephant_binds/var/run:/var/run,$ELEPHANT_WORKSPACE:/workspace elephant.sif elephant
 ```
 
-##### 4. Generate a dataset for the ELEPHANT server
+##### 4. Generate a dataset for the ELEPHANT server (Optional)
+
+| Info <br> :information_source: | In the latest version, this step can be done automatically and you do not need to do it manually if there is no particular reason. |
+| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------- |
 
 The following command will generate a dataset for the ELEPHANT server.
-Please see details in <a href="#/?id=_3-generate-a-dataset-for-the-elephant-server" onclick="alwaysScroll(event)">the Docker part</a>.
+Please see details in <a href="#/?id=_3-generate-a-dataset-for-the-elephant-server-optional" onclick="alwaysScroll(event)">the Docker part</a>.
 
 ```bash
 singularity exec instance://elephant python /opt/elephant/script/dataset_generator.py --uint16 /workspace/datasets/elephant-demo/elephant-demo.h5 /workspace/datasets/elephant-demo
