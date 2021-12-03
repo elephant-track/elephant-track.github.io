@@ -187,8 +187,8 @@ When you finish using the ELEPHANT, stop and terminate your Colab runtime so tha
 
 <img src="_media/terminate-colab.png"></img>
 
-| Info <br> :information_source: | If you see the following message, it is likely that you exceeded the usage limits. Unfortunately, you cannot use Colab with GPU at the moment. In that case, you can still use ELEPHANT with CPU only. Please note that with CPU only, training and prediction take longer than on the GPU-accelerated environment. See details <a href="https://research.google.com/colaboratory/faq.html#usage-limits">here</a> |
-| :----------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Info <br> :information_source: | If you see the following message, it is likely that you exceeded the usage limits. Unfortunately, you cannot use Colab with GPU at the moment. In that case, you can still use ELEPHANT with CPU only. Please note that with CPU only, training and prediction take longer than on the GPU-accelerated environment. You can also consider Colab's paid options (Colab Pro and Colab+), which will allow you to use more computing resources. See details <a href="https://research.google.com/colaboratory/faq.html#usage-limits">here</a>. |
+| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 <img src="_media/colab-limits-warning.png"></img>
 
@@ -1216,7 +1216,7 @@ make ELEPHANT_DOCKER="sudo docker" bash
 
 ##### 1.Download/Clone a repository
 
-Download and extract a [.zip file](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.2.0.zip).
+Download and extract the latest release of the ELEPHANT server [here](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.3.2.zip).
 
 Alternatively, you can clone a repository from [GitHub](https://github.com/elephant-track/elephant-server).
 
@@ -1336,7 +1336,9 @@ Now, the ELEPHANT server is ready.
 singularity --version
 ```
 
-Please [download the release `v0.1.0-singularity`](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.1.0-singularity.zip), or checkout the tag `v0.1.0-singularity` on Git to follow the instructions below.
+Download and extract the latest release of the ELEPHANT server [here](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.3.2.zip).
+
+Alternatively, you can clone a repository from [GitHub](https://github.com/elephant-track/elephant-server).
 
 ##### 1. Build a container
 
