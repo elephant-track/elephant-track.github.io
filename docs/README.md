@@ -1408,7 +1408,11 @@ singularity instance stop elephant
 The ELEPHANT server can be accessed remotely by exposing the ports for `NGINX` (`8080` by default) and `RabbitMQ` (`5672` by default) .
 
 To establish connections to the server, one option would be to use SSH portforwarding.\
-Assuming that you can access to the computer that launches the ELEPHANT server by `ssh USERNAME@HOSTNAME` (or `ssh.exe USERNAME@HOSTNAME` on Windows), you can forward the ports for ELEPHANT as below.
+You can use the `Control Panel` to establish these connections. Please set the parameters and press the `Add Port Forward` button.
+
+<img src="_media/control-panel-established.png"></img>
+
+Alternatively, you can use CLI. Assuming that you can access to the computer that launches the ELEPHANT server by `ssh USERNAME@HOSTNAME` (or `ssh.exe USERNAME@HOSTNAME` on Windows), you can forward the ports for ELEPHANT as below.
 
 ```bash
 ssh -N -L 8080:localhost:8080 USERNAME@HOSTNAME # NGINX
