@@ -63,7 +63,8 @@ Please install [Fiji](https://imagej.net/software/fiji/) on your system and upda
 
 5. Click on the button `Close` in the dialog `Manage update sites`.
 6. Click on the button `Apply changes` in the dialog `ImageJ Updater`.
-7. Restart [Fiji](https://imagej.net/software/fiji/).
+7. Replace `Fiji.app/jars/elephant-0.3.1.jar` with [elephant-0.4.0-SNAPSHOT.jar](https://github.com/elephant-track/elephant-client/releases/download/v0.4.0-dev/elephant-0.4.0-SNAPSHOT.jar)
+8. Restart [Fiji](https://imagej.net/software/fiji/).
 
 | Info <br> :information_source: | When there is an update, ImageJ Updater will notify you. Alternatively, you can check the updates manually by running `Help > Update...`. It is recommended to keep up-to-date with the latest version of ELEPHANT to follow the new features and bug fixes. |
 | :----------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -74,12 +75,13 @@ To start working with ELEPHANT, you need to prepare a Mastodon project.
 
 #### 1. Prepare image data in the BDV format
 
-[Download the demo data](https://doi.org/10.5281/zenodo.5519708) and extract the files as below.
+Download the demo data (see Slack) and extract the files as below.
 
 ```bash
-elephant-demo
-├── elephant-demo.h5
-└── elephant-demo.xml
+dataset_hdf5
+├── dataset_hdf5.h5
+├── dataset_hdf5-00-00.h5
+└── dataset_hdf5.xml
 ```
 
 Alternatively, you can follow [the instructions here](https://imagej.net/plugins/bdv/#exporting-from-imagej-stacks) to prepare these files for your own data.
