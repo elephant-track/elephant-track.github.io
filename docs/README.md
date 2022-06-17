@@ -31,7 +31,7 @@
 ## Overview
 
 ELEPHANT is a platform for 3D cell tracking, based on incremental and interactive deep learning.\
-It works on client-server architecture. The server is built as a web application that serves deep learning-based algorithms.
+It implements a client-server architecture. The server is built as a web application that serves deep learning-based algorithms.
 The client application is implemented by extending [Mastodon](https://github.com/mastodon-sc/mastodon), providing a user interface for annotation, proofreading and visualization.
 Please find <a href="#/?id=system-requirements" onclick="alwaysScroll(event)">below</a> the system requirements for each module.
 
@@ -273,7 +273,7 @@ ELEPHANT provides the following shortcut keys for annotating spots.
 | Action  | Shortcut |
 | ------- | -------- |
 | Accepte | 4        |
-| Rejecte | 5        |
+| Reject  | 5        |
 
 | Info <br> :information_source: | For advanced users: Please check <a href="#/?id=tag-sets-available-on-elephant" onclick="alwaysScroll(event)">here</a> |
 | :----------------------------: | :--------------------------------------------------------------------------------------------------------------------- |
@@ -936,7 +936,7 @@ By default, ELEPHANT generates and uses the following tag sets.
   <tbody>
     <!--Basic Settings-->
     <tr>
-      <td rowspan=21>Basic Settings</td>
+      <td rowspan=22>Basic Settings</td>
       <td>prediction with patches</td>
       <td>If checked, prediction is performed on the patches with the size specified below.</td>
     </tr>
@@ -1001,6 +1001,10 @@ By default, ELEPHANT generates and uses the following tag sets.
       <td>If checked, optical flow estimation is used to support nearest neighbor (NN) linking.</td>
     </tr>
     <tr>
+      <td>use interpolation for linking</td>
+      <td>If checked, the missing spots in the link are interpolated, which happens when 1 < <code>NN search neighbors</code>.</td>
+    </tr>
+    <tr>
       <td>dataset dir</td>
       <td>The path of the dataset dir stored on the server.<br>The path is relative to <code>/workspace/models/</code> on the server.</td>
     </tr>
@@ -1022,7 +1026,7 @@ By default, ELEPHANT generates and uses the following tag sets.
     </tr>
     <!--Advanced Settings-->
     <tr>
-      <td rowspan=21>Advanced Settings</td>
+      <td rowspan=28>Advanced Settings</td>
       <td>output prediction</td>
       <td>If checked, prediction output is save as <code>.zarr</code> on the server for the further inspection.</td>
     </tr>
@@ -1033,6 +1037,18 @@ By default, ELEPHANT generates and uses the following tag sets.
     <tr>
       <td>mitigate edge discontinuities</td>
       <td>If checked, discontinuities found in the edge regions of the prediction are mitigated.<br>The required memory size will increase slightly.</td>
+    </tr>
+    <tr>
+      <td>rescale x</td>
+      <td>rescale the image data in x axis with this value.</td>
+    </tr>
+    <tr>
+      <td>rescale y</td>
+      <td>rescale the image data in y axis with this value.</td>
+    </tr>
+    <tr>
+      <td>rescale z</td>
+      <td>rescale the image data in z axis with this value.</td>
     </tr>
     <tr>
       <td>training crop size x</td>
@@ -1047,7 +1063,11 @@ By default, ELEPHANT generates and uses the following tag sets.
       <td>Training crop size for z axis. The smaller of this parameter and the z dimension of the image is used for the actual crop size z.</td>
     </tr>
     <tr>
-      <td>class weight bg</td>
+      <td>batch size</td>
+      <td>Batch size for training and prediction.</td>
+    </tr>
+    <tr>
+      <td>class weight background</td>
       <td>Class weight for <i>background</i> in the loss function for the detection model.</td>
     </tr>
     <tr>
@@ -1091,6 +1111,10 @@ By default, ELEPHANT generates and uses the following tag sets.
       <td>In training, the XY plane is randomly rotated based on this value. The unit is degree.<br>e.g. If this value is 30, the rotation angle is randomly picked up from the range [-30, 30].</td>
     </tr>
     <tr>
+      <td>augmentation contrast</td>
+      <td>In training, the contrast is modified randomly based on this value.<br>e.g. If this value is 0.2, the contrast is randomly picked up from the range [0.8, 1].</td>
+    </tr>
+    <tr>
       <td>NN search depth</td>
       <td>This value determines how many timepoints the algorithm searches for the parent spot in the linking workflow.</td>
     </tr>
@@ -1099,8 +1123,16 @@ By default, ELEPHANT generates and uses the following tag sets.
       <td>This value determines how many neighbors are considered as candidates for the parent spot in the linking workflow.</td>
     </tr>
     <tr>
-      <td>use interpolation for linking</td>
-      <td>If checked, the missing spots in the link are interpolated, which happens when 1 < <code>NN search neighbors</code>.</td>
+      <td>Training log intervals</td>
+      <td>This value specifies how frequently the logging takes place in training.</td>
+    </tr>
+    <tr>
+      <td>Cache maximum bytes (MiB)</td>
+      <td>This value specifies the memory size to be used for caching. Caching enables faster data loading.</td>
+    </tr>
+    <tr>
+      <td>use memmap</td>
+      <td>This value specifies if a <a href=https://numpy.org/doc/stable/reference/generated/numpy.memmap.html>memory-map</a> is enabled in data loading. Memory-map enables memory-efficient data loading. Memory-mapped files are stored in <code>workspace/memmaps</code> which can grow large as these files accumulate. The user can delete these files when they are not needed.</td>
     </tr>
     <tr>
       <td>log file basename</td>
@@ -1130,6 +1162,9 @@ By default, ELEPHANT generates and uses the following tag sets.
     </tr>
   </tbody>
 </table>
+
+| Info <br> :information_source: | ELEPHANT provides options for faster and memory-efficient data loading. Caching mechanism directly store the loaded data in RAM using the Least Recently Used storategy. The user can specify the maximum size of RAM for caching in the preferences dialog. <a href=https://numpy.org/doc/stable/reference/generated/numpy.memmap.html>Memory-map</a> is another optional layer in data loading. Memory-map stores an array in a binary format and accesses data chunks only when they are required, enabling a meomory-efficient data handling. The above two options can be used together. |
+| :----------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## System Requirements
 
@@ -1345,62 +1380,37 @@ Alternatively, you can clone a repository from [GitHub](https://github.com/eleph
 
 ##### 1. Build a container
 
-Run the following command at the project root directory where you can find a `elephant.def` file.
+Run the following command at the project root directory where you can find a `elephant.def` file.\
+The following command build a singularity container (`delephant.sif`) and copies `/var/lib/`, `/var/log/` and `/var/run/` in the container to `$HOME/.elephant_binds` on the host.
 
 ```bash
-singularity build --fakeroot elephant.sif elephant.def
+make singularity-build
 ```
 
-##### 2. Prepare files to bind
+##### 2. Start an instance for the ELEPHANT server
 
-The following command copies `/var/lib/`, `/var/log/` and `/var/run/` in the container to `$HOME/.elephant_binds` on the host.
+The command below starts an `instance` ([see details](https://sylabs.io/guides/3.7/user-guide/running_services.html#container-instances-in-singularity)) named `elephant` using the image written in `elephant.sif`.\
+Please set the environment variable `ELEPHANT_WORKSPACE` to the `workspace` directory on your system.
 
 ```bash
-singularity run --fakeroot elephant.sif
+make singularity-launch
 ```
 
-##### 3. Start an instance for the ELEPHANT server
-
-It is recommended to launch the ELEPHANT server inside a singularity `instance` rather than using `shell` or `exec` directly, which can make some processes alive after exiting the `supervisor` process. All processes inside a `instance` can be terminated by stopping the `instance` ([see details](https://sylabs.io/guides/3.7/user-guide/running_services.html#container-instances-in-singularity)).
-
-The command below starts an `instance` named `elephant` using the image written in `elephant.sif`.\
-The `--nv` option is required to set up the container that can use NVIDIA GPU and CUDA ([see details](https://sylabs.io/guides/3.7/user-guide/gpu.html)).\
-The `--bind` option specifies the directories to bind from the host to the container ([see details](https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html)). The files copied in the previous step are bound to the original container location as `writable` files. Please set `$ELEPHANT_WORKSPACE` to the `workspace` directory on your system.
+Please specify the environment variable `ELEPHANT_GPU` if you want to use a specific GPU device on your system (default: `all`).
 
 ```bash
-singularity instance start --nv --bind $HOME/.elephant_binds/var/lib:/var/lib,$HOME/.elephant_binds/var/log:/var/log,$HOME/.elephant_binds/var/run:/var/run,$ELEPHANT_WORKSPACE:/workspace elephant.sif elephant
-```
-
-##### 4. Generate a dataset for the ELEPHANT server (Optional)
-
-| Info <br> :information_source: | In the latest version, this step can be done automatically and you do not need to do it manually if there is no particular reason. |
-| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------- |
-
-The following command will generate a dataset for the ELEPHANT server.
-Please see details in <a href="#/?id=_3-generate-a-dataset-for-the-elephant-server-optional" onclick="alwaysScroll(event)">the Docker part</a>.
-
-```bash
-singularity exec instance://elephant python /opt/elephant/script/dataset_generator.py --uint16 /workspace/datasets/elephant-demo/elephant-demo.h5 /workspace/datasets/elephant-demo
-```
-
-##### 5. Launch the ELEPHANT server
-
-The following command execute a script that launches the ELEPHANT server.
-Please specify the `SINGULARITYENV_CUDA_VISIBLE_DEVICES` if you want to use a specific GPU device on your system (default: `0`).
-
-```bash
-SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity exec instance://elephant /start.sh
+ELEPHANT_GPU=0 make singularity-launch
 ```
 
 At this point, you will be able to work with the ELEPHANT server.
 Please follow <a href="#/?id=remote-connection-to-the-elephant-server" onclick="alwaysScroll(event)">the instructions for seting up the remote connection</a>.
 
-##### 6. Stop an instance for the ELEPHANT server
+##### 3. Stop an instance for the ELEPHANT server
 
 After exiting the `exec` by `Ctrl+C`, please do not forget to stop the `instance`.
 
 ```bash
-singularity instance stop elephant
+make singularity-stop
 ```
 
 ## Remote connection to the ELEPHANT server
