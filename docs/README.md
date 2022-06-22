@@ -1251,7 +1251,7 @@ make ELEPHANT_DOCKER="sudo docker" bash
 
 ##### 1.Download/Clone a repository
 
-Download and extract the latest release of the ELEPHANT server [here](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.3.2.zip).
+Download and extract the latest release of the ELEPHANT server [here](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.4.0.zip).
 
 Alternatively, you can clone a repository from [GitHub](https://github.com/elephant-track/elephant-server).
 
