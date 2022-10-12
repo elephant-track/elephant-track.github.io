@@ -122,6 +122,9 @@ It also provides functions for setting up the servers.
 
 <img src="_media/control-panel-default.png"></img>
 
+| Info <br> :information_source: | **DEPRECATED**: Google Colab has updated <a href="https://research.google.com/colaboratory/faq.html#limitations-and-restrictions">its policy</a> and restricted the use of SSH, with which ELEPHANT establish the connection. |
+| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
 Here, we will set up the servers using [Google Colab](https://research.google.com/colaboratory/faq.html), a freely available product from Google Research. You don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
 
 #### Setting up with Google Colab
