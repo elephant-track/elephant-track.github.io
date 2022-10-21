@@ -11,6 +11,6 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
             sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
             sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 sudo apt update && sudo apt install -y nvidia-docker2 && sudo systemctl restart docker
-sudo usermod -aG docker $USER && newgrp docker
+sudo usermod -aG docker $USER
 sudo apt install -y git
 git clone https://github.com/elephant-track/elephant-server.git
