@@ -14,5 +14,3 @@ sudo apt update && sudo apt install -y nvidia-docker2 && sudo systemctl restart 
 sudo usermod -aG docker $USER && newgrp docker
 sudo apt install -y git
 git clone https://github.com/elephant-track/elephant-server.git
-cd elephant-server
-make build
