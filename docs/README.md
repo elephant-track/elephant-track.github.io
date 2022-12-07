@@ -122,78 +122,12 @@ It also provides functions for setting up the servers.
 
 <img src="_media/control-panel-default.png"></img>
 
-| Info <br> :information_source: | **DEPRECATED**: Google Colab has updated <a href="https://research.google.com/colaboratory/faq.html#limitations-and-restrictions">its policy</a> and restricted the use of SSH, with which ELEPHANT establish the connection. |
+| Info <br> :information_source: | **DEPRECATED**: Google Colab has updated <a href="https://research.google.com/colaboratory/faq.html#limitations-and-restrictions">its policy</a> and restricted the use of SSH, with which ELEPHANT establish the connection. Please consider using Google Cloud instead. |
 | :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-Here, we will set up the servers using [Google Colab](https://research.google.com/colaboratory/faq.html), a freely available product from Google Research. You don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
+Here, we will set up the servers using [Google Cloud](https://cloud.google.com/), a cloud computing services by Google. You don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities. Please follow the instructions in the video below to get started.
 
-#### Setting up with Google Colab
-
-##### 1. Prepare a Google account
-
-If you already have one, you can just use it. Otherwise, create a Google account [here](https://accounts.google.com/signup).
-
-##### 2. Create a ngrok account
-
-Create a ngrok account from the following link.
-
-[ngrok - secure introspectable tunnels to localhost](https://dashboard.ngrok.com/signup)
-
-| Info <br> :information_source: | Ngrok is a service that tunnels between a remote computer and a local computer using a public URL on the Internet. It is helpful when we do not have full access to the remote computing environment as is the case with Google Colab. Some institutes have disallowed the use of Ngrok due to security concerns. If the service is not available on your network, unfortunately, Google Colab cannot be used for setting up the ELEPHANT server. |
-| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-
-##### 3. Open and run a Colab notebook
-
-Open a Colab notebook from this button. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elephant-track/elephant-server/blob/dev/elephant_server.ipynb)
-
-On Goolge Colab, run the command `Runtime > Run all` and select `RUN ANYWAY` in the following box.
-
-<img src="_media/colab-warning.png"></img>
-
-| Info <br> :information_source: | If you get an error when you rerun the notebook, it is possible that your connection has been lost. In that case, please rerun all the cells again from `Runtime > Run all`. |
-| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-
-##### 4. Start a ngrok tunnel
-
-After around 10 minutes, you will find the following box on the bottom of the page.
-
-<img src="_media/ngrok-box.png"></img>
-
-Click the link to open your ngrok account page and copy your authtoken, then paste it to the box above.
-
-<img src="_media/ngrok-authtoken.png"></img>
-
-After inputting your authtoken, you will have many lines of outputs. Scroll up and find the following two lines.
-
-```Colab
-*** SSH information *** 
-SSH user: root	SSH host: [your_random_value].tcp.ngrok.io	SSH port: [your_random_5digits]
-Root password: [your_random_password]
-```
-
-##### 5. Establish connections from your computer to the servers on Colab
-
-Go back to the `Control Panel` and change the values of `SSH host` and `SSH port` according to the output from Colab. You can leave other fields as default.\
-Click the `Add Port Forward` button to establish the connection to the ELEPHANT server. Click `yes` for a warning dialog and enter your password shown on Colab when asked for it.\
-Subsequently, change `Local port` to `5672` and `Remote port` to `5672` and click the `Add Port Forward` button to the RabbitMQ server.
-
-If everything is ok, you will see green signals in the `Control Panel`.
-
-<img src="_media/control-panel-established.png"></img>
-
-##### 6. Terminate
-
-When you finish using the ELEPHANT, stop and terminate your Colab runtime so that you can release your resources.
-
-- Stop the running execution by `Runtime > Interrupt execution`
-- Terminate the runtime by `Runtime > Manage sessions`
-
-<img src="_media/terminate-colab.png"></img>
-
-| Info <br> :information_source: | If you see the following message, it is likely that you exceeded the usage limits. Unfortunately, you cannot use Colab with GPU at the moment. In that case, you can still use ELEPHANT with CPU only. Please note that with CPU only, training and prediction take longer than on the GPU-accelerated environment. You can also consider Colab's paid options (Colab Pro and Colab+), which will allow you to use more computing resources. See details <a href="https://research.google.com/colaboratory/faq.html#usage-limits">here</a>. |
-| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-
-<img src="_media/colab-limits-warning.png"></img>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JUPIYq6jAEA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 | Info <br> :information_source: | Advanced options for the server setup can be found <a href="#/?id=advanced-options-for-the-elephant-server" onclick="alwaysScroll(event)">here</a> |
 | :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1227,9 +1161,11 @@ There are three options to set up the ELEPHANT server.
   
   This option is recommended if you can access a powerful computer that satisfies <a href="#/?id=elephant-server-requirements-singularity" onclick="alwaysScroll(event)">the server requirements (Singularity)</a> as a non-root user (e.g. HPC cluster).
 
-- <a href="#/?id=setting-up-with-google-colab" onclick="alwaysScroll(event)">Setting up with Google Colab</a>
+- <a href="#/?id=setting-up-with-google-cloud" onclick="alwaysScroll(event)">Setting up with Google Cloud</a>
   
-  Alternatively, you can set up the ELEPHANT server with [Google Colab](https://research.google.com/colaboratory/faq.html), a freely available product from Google Research. In this option, you don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
+  Alternatively, you can set up the ELEPHANT server with [Google Cloud](https://cloud.google.com/), a freely available product from Google Research. In this option, you don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
+
+
 
 #### Setting up with Docker
 
