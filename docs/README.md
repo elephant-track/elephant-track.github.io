@@ -1190,7 +1190,7 @@ make ELEPHANT_DOCKER="sudo docker" bash
 
 ##### 1.Download/Clone a repository
 
-Download and extract the latest release of the ELEPHANT server [here](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.4.0.zip).
+Download and extract the latest release of the ELEPHANT server [here](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.4.3.zip).
 
 Alternatively, you can clone a repository from [GitHub](https://github.com/elephant-track/elephant-server).
 
@@ -1203,7 +1203,7 @@ git clone https://github.com/elephant-track/elephant-server.git
 First, change the directory to the project root.
 
 ```bash
-cd elephant-server-0.2.0
+cd elephant-server
 ```
 
 The following command will build a Docker image that integrates all the required modules.
@@ -1313,7 +1313,7 @@ Now, the ELEPHANT server is ready.
 singularity --version
 ```
 
-Download and extract the latest release of the ELEPHANT server [here](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.3.5.zip).
+Download and extract the latest release of the ELEPHANT server [here](https://github.com/elephant-track/elephant-server/archive/refs/tags/v0.4.3.zip).
 
 Alternatively, you can clone a repository from [GitHub](https://github.com/elephant-track/elephant-server).
 
