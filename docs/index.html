@@ -30,15 +30,18 @@
         '/v0.2/.*_sidebar.md': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.2/docs/_sidebar.md',
         '/v0.3/.*_sidebar.md': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.3/docs/_sidebar.md',
         '/v0.4/.*_sidebar.md': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.4/docs/_sidebar.md',
+        '/v0.5/.*_sidebar.md': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.5/docs/_sidebar.md',
         '/.*/_sidebar.md': '/_sidebar.md',
         '/v0.1/': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.1/docs/README.md',
         '/v0.2/': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.2/docs/README.md',
         '/v0.3/': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.3/docs/README.md',
         '/v0.4/': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.4/docs/README.md',
+        '/v0.5/': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.5/docs/README.md',
         '/v0.1/(.*)': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.1/docs/$1',
         '/v0.2/(.*)': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.2/docs/$1',
         '/v0.3/(.*)': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.3/docs/$1',
         '/v0.4/(.*)': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.4/docs/$1',
+        '/v0.5/(.*)': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/v0.5/docs/$1',
         '/deep-lineage/.*_sidebar.md': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/deep-lineage/docs/_sidebar.md',
         '/deep-lineage/': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/deep-lineage/docs/README.md',
         '/deep-lineage/(.*)': 'https://raw.githubusercontent.com/elephant-track/elephant-track.github.io/deep-lineage/docs/$1',
@@ -54,6 +57,7 @@
         '<option value="v0.2">v0.2</option>' +
         '<option value="v0.3">v0.3</option>' +
         '<option value="v0.4">v0.4</option>' +
+        '<option value="v0.5">v0.5</option>' +
         '</select>' +
         '</div>',
       repo: 'https://github.com/elephant-track',
@@ -68,13 +72,13 @@
         namespace: 'docs-elephant',
         hideOtherSidebarContent: true,
         depth: 3,
-        pathNamespaces: ['', '/v0.1', '/v0.2', '/v0.3', '/v0.4', '/deep-lineage']
+        pathNamespaces: ['', '/v0.1', '/v0.2', '/v0.3', '/v0.4', '/v0.5', '/deep-lineage']
       },
       namespaces: [
         {
           id: "version",
-          values: ["latest", "v0.1", "v0.2", "v0.3", 'v0.4', "deep-lineage"],
-          default: "v0.4",
+          values: ["latest", "v0.1", "v0.2", "v0.3", 'v0.4', '/v0.5', "deep-lineage"],
+          default: "v0.5",
           optional: true,
           selector: "#version-selector"
         }
