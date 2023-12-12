@@ -9,7 +9,7 @@
     </tr>
     <tr>
       <td>Developer</td>
-      <td><a href="http://www.ens-lyon.fr/lecole/nous-connaitre/annuaire/ko-sugawara">Ko Sugawara</a></td>
+      <td><a href="https://github.com/ksugar">Ko Sugawara</a></td>
     </tr>
     <tr>
       <td>Forum</td>
@@ -1412,7 +1412,7 @@ and other great projects.
 
 ## Contact
 
-[Ko Sugawara](http://www.ens-lyon.fr/lecole/nous-connaitre/annuaire/ko-sugawara)
+[Ko Sugawara](https://github.com/ksugar)
 
 Please post feedback and questions to the [Image.sc forum](https://forum.image.sc/tag/elephant).\
 It is important to add the tag `elephant` to your posts so that we can reach you quickly.
