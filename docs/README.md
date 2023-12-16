@@ -123,7 +123,7 @@ It also provides functions for setting up the servers.
 <img src="_media/control-panel-default.png"></img>
 
 | Info <br> :information_source: | **DEPRECATED**: Google Colab has updated <a href="https://research.google.com/colaboratory/faq.html#limitations-and-restrictions">its policy</a> and restricted the use of SSH, with which ELEPHANT establish the connection. Please consider using Google Cloud instead. |
-| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 #### Setting up with Google Cloud
 
@@ -1168,7 +1168,7 @@ There are three options to set up the ELEPHANT server.
   Alternatively, you can set up the ELEPHANT server with [Google Cloud](https://cloud.google.com/), a cloud computing services by Google. In this option, you don't need to have a high-end GPU or a Linux machine to start using ELEPHANT's deep learning capabilities.
 
 | Info <br> :information_source: | **DEPRECATED**: Google Colab has updated <a href="https://research.google.com/colaboratory/faq.html#limitations-and-restrictions">its policy</a> and restricted the use of SSH, with which ELEPHANT establish the connection. Please consider using Google Cloud instead. |
-| :----------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :----------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 
 #### Setting up with Docker
